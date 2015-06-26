@@ -13,8 +13,8 @@ The latest version (v1.06) can be downloaded here (right-click > "Save link as..
 [Download TextSplit v1.06](Download v1.06.zip)
 
 # Changelog
-v1.2: Fixed hotkey bugs.
-v1.3: Added the ability to temporarily disable the global hotkeys.
-v1.4: Margins between the text box and the sides of the window can be changed.
-v1.5: Added the ability to open multiple .tst files in seperate windows.
-v1.6: Fixed issues and improved GUI regarding navigation between multiple .tst files.
+- v1.2: Fixed hotkey bugs.
+- v1.3: Added the ability to temporarily disable the global hotkeys.
+- v1.4: Margins between the text box and the sides of the window can be changed.
+- v1.5: Added the ability to open multiple .tst files in seperate windows.
+- v1.6: Fixed issues and improved GUI regarding navigation between multiple .tst files.
