@@ -51,7 +51,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "TextSplit v1.5";
+            this.label1.Text = "TextSplit v1.6";
             // 
             // label2
             // 

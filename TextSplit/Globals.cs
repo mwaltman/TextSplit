@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using System;
 using System.Collections;
+using System.IO;
 
 namespace TextSplit
 {
@@ -8,45 +9,55 @@ namespace TextSplit
     public static class Globals
     {
         public static TextSplitMain TSM { get; set; }
-        public static TextSplitShow currentWindow { get; set; }
+        private static TextSplitShow _currentWindow;
+        public static TextSplitShow currentWindow { 
+            get {
+                return _currentWindow;
+            }
+            set {
+                if (value != null) {
+                    _currentWindow = value;
+                    TSM.lCurrWindow.Text = Path.GetFileNameWithoutExtension(_currentWindow.fileName);
+                }
+            } 
+        }
         public static ArrayList windowList { get; set; }
 
         private static KeyboardHook hook;
 
         static Globals() {
-#if DEBUG
-            Properties.Settings.Default.Reset();
-#endif
+            // Resets default settigns if in debug mode
+            #if DEBUG
+                //Properties.Settings.Default.Reset();
+            #endif
 
             TSM = null;
             windowList = new ArrayList();
             currentWindow = null;
 
-            if (Properties.Settings.Default.Hotkeys == null) {
-                Properties.Settings.Default.Hotkeys = new Keys[8];
-            }
             if (Properties.Settings.Default.FileName == null) {
                 Properties.Settings.Default.FileName = new ArrayList();
-                Properties.Settings.Default.FileName.Add("");
             }
 
             InitializeHotkeys();
         }
 
         public static void ShowPropertiesFileName() {
-            Console.Write("FILENAME: ");
-            foreach (string str in Properties.Settings.Default.FileName) {
-                Console.Write(str + " --- ");
-            }
-            Console.WriteLine();
+            //Console.Write("FILENAME: ");
+            //foreach (string str in Properties.Settings.Default.FileName) {
+            //    Console.Write("'" + str + "' ");
+            //}
+            //Console.WriteLine();
         }
 
         public static void InitializeHotkeys() {
             hook = new KeyboardHook();
             hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
-            for (int i = 0; i < Properties.Settings.Default.Hotkeys.Length; i++) {
-                if (Properties.Settings.Default.Hotkeys[i] != Keys.None) {
-                    hook.RegisterHotKey(Properties.Settings.Default.Hotkeys[i]);
+            foreach (TextSplitShow TSS in windowList) {
+                for (int i = 0; i < TSS.TST.Hotkeys.Length; i++) {
+                    if (TSS.TST.Hotkeys[i] != Keys.None) {
+                        hook.RegisterHotKey(TSS.TST.Hotkeys[i]);
+                    }
                 }
             }
         }
@@ -59,15 +70,23 @@ namespace TextSplit
             Globals.UpdateSlideInfo();
             TSS.Show();
             TSS.DisplaySlide();
-            Globals.ShowPropertiesFileName();
+            TSS.FileChangeActions();
+            TSS.Focus();
         }
 
-        public static void CloseWindow(TextSplitShow TSS) {
+        public static bool CloseWindow(TextSplitShow TSS, bool save) {
             int index = Globals.windowList.IndexOf(TSS);
             Globals.windowList.RemoveAt(index);
-            Properties.Settings.Default.FileName.RemoveAt(index);
-            Globals.currentWindow = (TextSplitShow)Globals.windowList[0];
-            Globals.ShowPropertiesFileName();
+            if (!save) {
+                Properties.Settings.Default.FileName.RemoveAt(index);
+            }
+            if (windowList.Count > 0) {
+                ((TextSplitShow)Globals.windowList[0]).Focus();
+                Globals.ShowPropertiesFileName();
+                return true;
+            } else {
+                return false;
+            }
         }
 
         public static void UpdateSlideInfo() {
@@ -81,46 +100,6 @@ namespace TextSplit
 
         public static void ChangeDisableHK() {
             TSM.cDisableHK.Checked = Properties.Settings.Default.DisableHK;
-        }
-
-        public static void GoToNext() {
-            currentWindow.DetectTextChange();
-            if (Properties.Settings.Default.SlideWrap) {
-                currentWindow.currentSlide = (currentWindow.currentSlide + 1) % currentWindow.TST.TextList.Count;
-            } else {
-                if (currentWindow.currentSlide < currentWindow.TST.TextList.Count - 1) {
-                    currentWindow.currentSlide += 1;
-                }
-            }
-            currentWindow.DisplaySlide();
-            UpdateSlideInfo();
-        }
-
-        public static void GoToPrev() {
-            currentWindow.DetectTextChange();
-            if (Properties.Settings.Default.SlideWrap) {
-                currentWindow.currentSlide = (currentWindow.currentSlide + currentWindow.TST.TextList.Count - 1) % currentWindow.TST.TextList.Count;
-            } else {
-                if (currentWindow.currentSlide > 0) {
-                    currentWindow.currentSlide -= 1;
-                }
-            }
-            currentWindow.DisplaySlide();
-            UpdateSlideInfo();
-        }
-
-        public static void GoToFirst() {
-            currentWindow.DetectTextChange();
-            currentWindow.currentSlide = 0;
-            currentWindow.DisplaySlide();
-            UpdateSlideInfo();
-        }
-
-        public static void GoToLast() {
-            currentWindow.DetectTextChange();
-            currentWindow.currentSlide = currentWindow.TST.TextList.Count - 1;
-            currentWindow.DisplaySlide();
-            UpdateSlideInfo();
         }
 
         public static void AddBefore() {
@@ -163,17 +142,19 @@ namespace TextSplit
          */
 
         private static void hook_KeyPressed(object sender, KeyPressedEventArgs e) {
-            if (e.Key == Properties.Settings.Default.Hotkeys[0] || e.Key == Properties.Settings.Default.Hotkeys[1]) {
-                Globals.GoToNext();
-            }
-            if (e.Key == Properties.Settings.Default.Hotkeys[2] || e.Key == Properties.Settings.Default.Hotkeys[3]) {
-                Globals.GoToPrev();
-            }
-            if (e.Key == Properties.Settings.Default.Hotkeys[4] || e.Key == Properties.Settings.Default.Hotkeys[5]) {
-                Globals.GoToFirst();
-            }
-            if (e.Key == Properties.Settings.Default.Hotkeys[6] || e.Key == Properties.Settings.Default.Hotkeys[7]) {
-                Globals.GoToLast();
+            foreach (TextSplitShow TSS in Globals.windowList) {
+                if (e.Key == TSS.TST.Hotkeys[0] || e.Key == TSS.TST.Hotkeys[1]) {
+                    TSS.GoToNext();
+                }
+                if (e.Key == TSS.TST.Hotkeys[2] || e.Key == TSS.TST.Hotkeys[3]) {
+                    TSS.GoToPrev();
+                }
+                if (e.Key == TSS.TST.Hotkeys[4] || e.Key == TSS.TST.Hotkeys[5]) {
+                    TSS.GoToFirst();
+                }
+                if (e.Key == TSS.TST.Hotkeys[6] || e.Key == TSS.TST.Hotkeys[7]) {
+                    TSS.GoToLast();
+                }
             }
         }
     }

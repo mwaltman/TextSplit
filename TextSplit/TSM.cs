@@ -35,20 +35,6 @@ namespace TextSplit
 
             Globals.TSM = this;
 
-            for (int i = 0; i < Properties.Settings.Default.FileName.Count; i++) {
-                TextSplitShow TSS = new TextSplitShow((string)Properties.Settings.Default.FileName[i]);
-                TSS.Show();
-                if (!(i == Properties.Settings.Default.FileName.Count - 1 && Globals.windowList.Count == 1)) {
-                    if (!TSS.fileLoaded) {
-                        Globals.CloseWindow(TSS);
-                    }
-                }
-            }
-
-            Globals.currentWindow.Focus();
-
-            Globals.ShowPropertiesFileName();
-
             ToolTip toolTip = new ToolTip();
             toolTip.ShowAlways = true;
             toolTip.SetToolTip(cReadOnly, "Toggles between Edit Mode and Read-Only Mode");
@@ -61,6 +47,23 @@ namespace TextSplit
             toolTip.SetToolTip(bPrevSlide, "Previous Slide");
             toolTip.SetToolTip(bFirstSlide, "First Slide");
             toolTip.SetToolTip(bLastSlide, "Last Slide");
+
+            bool exampleOpen = true;
+            for (int i = 0; i < Properties.Settings.Default.FileName.Count; i++) {
+                TextSplitShow TSS = new TextSplitShow((string)Properties.Settings.Default.FileName[i]);
+                if (TSS.fileLoaded) {
+                    Globals.OpenNewWindow(TSS);
+                    if (exampleOpen) {
+                        exampleOpen = false;
+                    }
+                }
+            }
+
+            // Opens example 
+            if (exampleOpen) {
+                TextSplitShow example = new TextSplitShow("");
+                Globals.OpenNewWindow(example);
+            }
         }
 
         /*
@@ -136,14 +139,14 @@ namespace TextSplit
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            Application.Exit();
+            this.Close();
         }
 
         private void editHotkeysToolStripMenuItem_Click(object sender, EventArgs e) {
             if (!Properties.Settings.Default.DisableHK) {
                 Globals.ClearHotkeys();
             }
-            new TextSplitHotkeys().ShowDialog();
+            new TextSplitHotkeys(Globals.currentWindow).ShowDialog();
             if (!Properties.Settings.Default.DisableHK) {
                 Globals.InitializeHotkeys();
             }
@@ -154,19 +157,27 @@ namespace TextSplit
         }
 
         private void bPrevSlide_Click(object sender, EventArgs e) {
-            Globals.GoToPrev();
+            foreach (TextSplitShow TSS in Globals.windowList) {
+                TSS.GoToPrev();
+            }
         }
 
         private void bNextSlide_Click(object sender, EventArgs e) {
-            Globals.GoToNext();
+            foreach (TextSplitShow TSS in Globals.windowList) {
+                TSS.GoToNext();
+            }
         }
 
         private void bFirstSlide_Click(object sender, EventArgs e) {
-            Globals.GoToFirst();
+            foreach (TextSplitShow TSS in Globals.windowList) {
+                TSS.GoToFirst();
+            }
         }
 
         private void bLastSlide_Click(object sender, EventArgs e) {
-            Globals.GoToLast();
+            foreach (TextSplitShow TSS in Globals.windowList) {
+                TSS.GoToLast();
+            }
         }
 
         private void bPrevWindow_Click(object sender, EventArgs e) {
@@ -217,8 +228,11 @@ namespace TextSplit
         }
 
         private void TSM_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-            foreach (TextSplitShow TSS in Globals.windowList) {
-                TSS.CheckSaveChange();
+            Globals.ClearHotkeys();
+            int windowCount = Globals.windowList.Count;
+            for (int i = 0; i < windowCount; i++) {
+                ((TextSplitShow)Globals.windowList[0]).CheckSaveChange();
+                Globals.CloseWindow(((TextSplitShow)Globals.windowList[0]), true);
             }
             Properties.Settings.Default.Save();
         }

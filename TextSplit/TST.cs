@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Drawing;
 using System.Runtime.Serialization;
+using System.Windows.Forms;
 
 namespace TextSplit
 {
@@ -14,19 +15,11 @@ namespace TextSplit
         public Color[] Colors { get; set; } // { font color, background color }
         public int[] Size { get; set; } // Size of the inner window { width, height }
         public int[] Margins { get; set; } // Space between inner window and textbox { Left, Right, Up, Down }
-        //public bool ReadOnly { get; set; } // Read-only mode indicator
-        //public bool SlideWrap { get; set; } // Continuous slideshow indicator
-        //public bool DisableHK { get; set; } // Disable hotkeys indicator
+        public bool SlideWrap { get; set; } // Continuous slideshow indicator
+        public Keys[] Hotkeys { get; set; } // Hotkeys
 
         public TextSplitText() {
         }
-
-        /*
-         * Move from attribute to Settings:
-         * - ReadOnly
-         * - DisableHK
-         * - SlideWrap
-         */
 
         public TextSplitText(TextSplitText other) {
             TextList = other.TextList;
@@ -34,6 +27,8 @@ namespace TextSplit
             Colors = other.Colors;
             Size = other.Size;
             Margins = other.Margins;
+            SlideWrap = other.SlideWrap;
+            Hotkeys = other.Hotkeys;
         }
 
         public TextSplitText(SerializationInfo info, StreamingContext ctxt) {
@@ -47,6 +42,12 @@ namespace TextSplit
             try {
                 this.Margins = (int[])info.GetValue("Margins", typeof(int[]));
             } catch (Exception) { this.Margins = new int[] { 5, 5, 5, 5 }; }
+            try {
+                this.SlideWrap = (bool)info.GetValue("SlideWrap", typeof(bool));
+            } catch (Exception) { this.SlideWrap = false; }
+            try {
+                this.Hotkeys = (Keys[])info.GetValue("Hotkeys", typeof(Keys[]));
+            } catch (Exception) { this.Hotkeys = new Keys[8]; }
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt) {
@@ -55,6 +56,8 @@ namespace TextSplit
             info.AddValue("Colors", this.Colors);
             info.AddValue("Size", this.Size);
             info.AddValue("Margins", this.Margins);
+            info.AddValue("SlideWrap", this.SlideWrap);
+            info.AddValue("Hotkeys", this.Hotkeys);
         }
 
         public void Empty(string WelcomeText) {
@@ -64,6 +67,8 @@ namespace TextSplit
             Colors = new Color[] { Color.Black, Color.White };
             Size = new int[] { 284, 262 };
             Margins = new int[] { 5, 5, 5, 5 };
+            SlideWrap = false;
+            Hotkeys = new Keys[8];
         }
     }
 }

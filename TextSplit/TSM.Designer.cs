@@ -59,9 +59,12 @@
             this.tGoToSlide = new System.Windows.Forms.TextBox();
             this.bNextSlide = new System.Windows.Forms.Button();
             this.bPrevSlide = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lCurrWindow = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // fileToolStripMenuItem
@@ -186,7 +189,7 @@
             // 
             this.cReadOnly.Appearance = System.Windows.Forms.Appearance.Button;
             this.cReadOnly.AutoSize = true;
-            this.cReadOnly.Location = new System.Drawing.Point(12, 161);
+            this.cReadOnly.Location = new System.Drawing.Point(12, 197);
             this.cReadOnly.Name = "cReadOnly";
             this.cReadOnly.Size = new System.Drawing.Size(97, 23);
             this.cReadOnly.TabIndex = 7;
@@ -197,7 +200,7 @@
             // 
             this.cDisableHK.Appearance = System.Windows.Forms.Appearance.Button;
             this.cDisableHK.AutoSize = true;
-            this.cDisableHK.Location = new System.Drawing.Point(118, 161);
+            this.cDisableHK.Location = new System.Drawing.Point(118, 197);
             this.cDisableHK.Name = "cDisableHK";
             this.cDisableHK.Size = new System.Drawing.Size(94, 23);
             this.cDisableHK.TabIndex = 8;
@@ -210,7 +213,7 @@
             this.panel1.Controls.Add(this.bRemove);
             this.panel1.Controls.Add(this.bAddBefore);
             this.panel1.Controls.Add(this.bAddEnd);
-            this.panel1.Location = new System.Drawing.Point(12, 36);
+            this.panel1.Location = new System.Drawing.Point(12, 72);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(114, 110);
             this.panel1.TabIndex = 4;
@@ -259,7 +262,7 @@
             this.panel2.Controls.Add(this.tGoToSlide);
             this.panel2.Controls.Add(this.bNextSlide);
             this.panel2.Controls.Add(this.bPrevSlide);
-            this.panel2.Location = new System.Drawing.Point(137, 65);
+            this.panel2.Location = new System.Drawing.Point(137, 101);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(72, 81);
             this.panel2.TabIndex = 5;
@@ -316,11 +319,33 @@
             this.bPrevSlide.Text = "<";
             this.bPrevSlide.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lCurrWindow);
+            this.groupBox1.Location = new System.Drawing.Point(12, 27);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 39);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Current Window";
+            // 
+            // lCurrWindow
+            // 
+            this.lCurrWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lCurrWindow.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lCurrWindow.Location = new System.Drawing.Point(6, 16);
+            this.lCurrWindow.Name = "lCurrWindow";
+            this.lCurrWindow.Size = new System.Drawing.Size(188, 20);
+            this.lCurrWindow.TabIndex = 0;
+            this.lCurrWindow.Text = "currWindow.tst";
+            this.lCurrWindow.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // TextSplitMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 197);
+            this.ClientSize = new System.Drawing.Size(224, 232);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.cDisableHK);
             this.Controls.Add(this.panel1);
@@ -338,6 +363,7 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,6 +401,8 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openInNewWindowToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.Label lCurrWindow;
     }
 }
 

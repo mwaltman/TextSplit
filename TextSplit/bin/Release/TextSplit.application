@@ -7,14 +7,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="TextSplit.exe.manifest" size="4334">
+    <dependentAssembly dependencyType="install" codebase="TextSplit.exe.manifest" size="4333">
       <assemblyIdentity name="TextSplit.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="en-US" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Z90K8iEF7bXEIOZzM+6013RF9P1jLTrzQeJQU+DrkxQ=</dsig:DigestValue>
+        <dsig:DigestValue>R+5Zq0AZL9PJvWydDaIkgw5OnJSlcmKCunweodYDhsE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

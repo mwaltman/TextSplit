@@ -33,7 +33,7 @@ namespace TextSplit
 
             bTextColor.BackColor = TSS.TST.Colors[0];
             bBGColor.BackColor = TSS.TST.Colors[1];
-            checkBox1.Checked = Properties.Settings.Default.SlideWrap;
+            checkBox1.Checked = TSS.TST.SlideWrap;
 
             textboxList = new TextBox[] { tWidth, tHeight, tLeft, tRight, tTop, tBottom };
             maxSizes = new int[] { Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height };
@@ -41,7 +41,7 @@ namespace TextSplit
             newFont = TSS.TST.TextFont;
             newTextColor = TSS.TST.Colors[0];
             newBGColor = TSS.TST.Colors[1];
-            newWrap = Properties.Settings.Default.SlideWrap;
+            newWrap = TSS.TST.SlideWrap;
             newSize = (int[])TSS.TST.Size.Clone();
             newMargins = (int[])TSS.TST.Margins.Clone();
 
@@ -80,7 +80,7 @@ namespace TextSplit
             TSS.TST.Colors[0] = newTextColor;
             TSS.TST.Colors[1] = newBGColor;
             TSS.TST.Size = newSize;
-            Properties.Settings.Default.SlideWrap = newWrap;
+            TSS.TST.SlideWrap = newWrap;
             TSS.TST.Margins = newMargins;
             TSS.DisplaySlide();
             TSS.ChangeFilenameUnsaved();

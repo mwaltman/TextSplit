@@ -37,6 +37,10 @@ namespace TextSplit
             Globals.currentWindow = this;
             Globals.windowList.Add(this);
 
+            if (Properties.Settings.Default.FileName.Count < Globals.windowList.Count) {
+                Properties.Settings.Default.FileName.Add(fileName);
+            }
+
             serializer = new Serializer();
             try {
                 TST = serializer.DeSerializeObject(fileName);
@@ -50,10 +54,6 @@ namespace TextSplit
                 Globals.UpdateSlideInfo();
                 Globals.ChangeDisableHK();
                 Globals.ChangeReadOnly();
-                if (Properties.Settings.Default.FileName.Count < Globals.windowList.Count) {
-                    Properties.Settings.Default.FileName.Add(fileName);
-                }
-                Properties.Settings.Default.FileName[Globals.windowList.IndexOf(this)] = "";
             }
         }
 
@@ -158,8 +158,7 @@ namespace TextSplit
 
             openFileDialog.Filter = "TextSplit Text File|*.tst";
             openFileDialog.Title = title;
-            openFileDialog.ShowDialog();
-            if (openFileDialog.FileName != "") {
+            if (openFileDialog.ShowDialog() != DialogResult.Cancel && openFileDialog.FileName != "") {
                 fileName = openFileDialog.FileName;
                 TST = serializer.DeSerializeObject(fileName);
                 FileChangeActions();
@@ -169,13 +168,10 @@ namespace TextSplit
         public void OpenFileNewWindow(string title) {
             openFileDialog.Filter = "TextSplit Text File|*.tst";
             openFileDialog.Title = title;
-            openFileDialog.ShowDialog();
-            if (openFileDialog.FileName != "") {
-                fileName = openFileDialog.FileName;
-                TST = serializer.DeSerializeObject(fileName);
-                TextSplitShow TSS = new TextSplitShow(fileName);
-                //Globals.windowList.Add(TSS);
-                //Properties.Settings.Default.FileName.Add(TSS.fileName);
+            if (openFileDialog.ShowDialog() != DialogResult.Cancel && openFileDialog.FileName != "") {
+                string newFileName = openFileDialog.FileName;
+                TextSplitShow TSS = new TextSplitShow(newFileName);
+                TSS.TST = serializer.DeSerializeObject(newFileName);
                 Globals.OpenNewWindow(TSS);
             }
         }
@@ -189,8 +185,57 @@ namespace TextSplit
             Globals.ChangeDisableHK();
             ChangeFilenameSaved();
             fileLoaded = true;
-            Properties.Settings.Default.FileName[Globals.windowList.IndexOf(this)] = fileName;
+            int index = Globals.windowList.IndexOf(this);
+            Properties.Settings.Default.FileName[index] = fileName;
             Globals.ShowPropertiesFileName();
+        }
+
+        public void GoToNext() {
+            DetectTextChange();
+            if (TST.SlideWrap) {
+                currentSlide = (currentSlide + 1) % TST.TextList.Count;
+            } else {
+                if (currentSlide < TST.TextList.Count - 1) {
+                    currentSlide += 1;
+                }
+            }
+            DisplaySlide();
+            if (this == Globals.currentWindow) {
+                Globals.UpdateSlideInfo();
+            }
+        }
+
+        public void GoToPrev() {
+            DetectTextChange();
+            if (TST.SlideWrap) {
+                currentSlide = (currentSlide + TST.TextList.Count - 1) % TST.TextList.Count;
+            } else {
+                if (currentSlide > 0) {
+                    currentSlide -= 1;
+                }
+            }
+            DisplaySlide();
+            if (this == Globals.currentWindow) {
+                Globals.UpdateSlideInfo();
+            }
+        }
+
+        public void GoToFirst() {
+            DetectTextChange();
+            currentSlide = 0;
+            DisplaySlide();
+            if (this == Globals.currentWindow) {
+                Globals.UpdateSlideInfo();
+            }
+        }
+
+        public void GoToLast() {
+            DetectTextChange();
+            currentSlide = TST.TextList.Count - 1;
+            DisplaySlide();
+            if (this == Globals.currentWindow) {
+                Globals.UpdateSlideInfo();
+            }
         }
 
         /*
@@ -233,11 +278,8 @@ namespace TextSplit
         }
 
         private void TSS_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-            if (Globals.windowList.Count == 1) // If the window is the last window
-            {
+            if (!Globals.CloseWindow(this, false)) { // If the window is the last window, then close main as well
                 Globals.TSM.Close();
-            } else {
-                Globals.CloseWindow(this);
             }
         }
     }

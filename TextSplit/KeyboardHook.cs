@@ -65,8 +65,9 @@ namespace TextSplit
             _currentId = _currentId + 1;
 
             // register the hot key.
-            if (!RegisterHotKey(_window.Handle, _currentId, (uint)0, (uint)key))
-                throw new InvalidOperationException("Couldn’t register the hot key.");
+            try {
+                RegisterHotKey(_window.Handle, _currentId, (uint)0, (uint)key);
+            } catch (InvalidOperationException) { }
         }
 
         public event EventHandler<KeyPressedEventArgs> KeyPressed;
