@@ -15,3 +15,6 @@ D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit
 D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.exe
 D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.pdb
 D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.csprojResolveAssemblyReference.cache
+D:\Documents\GitHub\TextSplit\TextSplit\bin\Debug\TextSplit.exe.config
+D:\Documents\GitHub\TextSplit\TextSplit\obj\Debug\TextSplit.exe
+D:\Documents\GitHub\TextSplit\TextSplit\obj\Debug\TextSplit.pdb
