@@ -10,7 +10,7 @@ TextSplit is a program that displays text slides and allows users to set global 
 # Download for Windows
 The latest version (v1.6) can be downloaded here:
 
-[Download TextSplit v1.](https://raw.github.com/mwaltman/TextSplit/master/TextSplit%20v1.06.zip)
+[Download TextSplit v1.6](https://raw.github.com/mwaltman/TextSplit/master/TextSplit%20v1.06.zip)
 
 # Changelog
 - v1.2: Fixed hotkey bugs.
