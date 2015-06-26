@@ -8,7 +8,7 @@ TextSplit is a program that displays text slides and allows users to set global 
 - Works great with video streaming software such as Open Broadcaster Software and can be used to write notes for presentations.
 
 # Download for Windows
-The latest version (v1.06) can be downloaded here (right-click > "Save link as..."):
+The latest version (v1.06) can be downloaded here:
 
 [Download TextSplit v1.06](TextSplit v1.06.zip)
 
