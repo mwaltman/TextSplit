@@ -33,42 +33,43 @@ namespace TextSplit
 
         public TextSplitText(SerializationInfo info, StreamingContext ctxt) {
             // v1.1 Attributes
-            this.TextList = (ArrayList)info.GetValue("List", typeof(ArrayList));
-            this.TextFont = (Font)info.GetValue("Font", typeof(Font));
-            this.Colors = (Color[])info.GetValue("Colors", typeof(Color[]));
-            this.Size = (int[])info.GetValue("Size", typeof(int[]));
+            TextList =          (ArrayList)info.GetValue(   "List",         typeof(ArrayList));
+            TextFont =          (Font)info.GetValue(        "Font",         typeof(Font));
+            Colors =            (Color[])info.GetValue(     "Colors",       typeof(Color[]));
+            Size =              (int[])info.GetValue(       "Size",         typeof(int[]));
 
             // v1.4 Attributes
             try {
-                this.Margins = (int[])info.GetValue("Margins", typeof(int[]));
+                Margins =       (int[])info.GetValue(       "Margins",      typeof(int[]));
             } catch (Exception) { this.Margins = new int[] { 5, 5, 5, 5 }; }
             try {
-                this.SlideWrap = (bool)info.GetValue("SlideWrap", typeof(bool));
+                SlideWrap =     (bool)info.GetValue(        "SlideWrap",    typeof(bool));
             } catch (Exception) { this.SlideWrap = false; }
             try {
-                this.Hotkeys = (Keys[])info.GetValue("Hotkeys", typeof(Keys[]));
+                Hotkeys =       (Keys[])info.GetValue(      "Hotkeys",      typeof(Keys[]));
             } catch (Exception) { this.Hotkeys = new Keys[8]; }
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt) {
-            info.AddValue("List", this.TextList);
-            info.AddValue("Font", this.TextFont);
-            info.AddValue("Colors", this.Colors);
-            info.AddValue("Size", this.Size);
-            info.AddValue("Margins", this.Margins);
-            info.AddValue("SlideWrap", this.SlideWrap);
-            info.AddValue("Hotkeys", this.Hotkeys);
+            info.AddValue("List",           this.TextList);
+            info.AddValue("Font",           this.TextFont);
+            info.AddValue("Colors",         this.Colors);
+            info.AddValue("Size",           this.Size);
+            info.AddValue("Margins",        this.Margins);
+            info.AddValue("SlideWrap",      this.SlideWrap);
+            info.AddValue("Hotkeys",        this.Hotkeys);
         }
 
-        public void Empty(string WelcomeText) {
+        public void Empty() {
             TextList = new ArrayList();
-            TextList.Add(WelcomeText);
-            TextFont = new Font("Microsoft Sans Serif", 9, FontStyle.Regular);
-            Colors = new Color[] { Color.Black, Color.White };
+            TextList.Add("Type your text in this window.");
             Size = new int[] { 284, 262 };
             Margins = new int[] { 5, 5, 5, 5 };
+            Globals.Themes["Standard"].Apply();
             SlideWrap = false;
             Hotkeys = new Keys[8];
+            Hotkeys[0] = Keys.NumPad6; // v1.7 Addition
+            Hotkeys[2] = Keys.NumPad4; // v1.7 Addition
         }
     }
 }

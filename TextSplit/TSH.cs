@@ -7,33 +7,34 @@ namespace TextSplit
     public partial class TextSplitHotkeys : Form
     {
         private Keys[] newHotkeys;
-        private String[] textboxNames;
+        private string[] textboxNames;
         private TextSplitShow TSS;
 
         public TextSplitHotkeys(TextSplitShow TSS) {
             InitializeComponent();
 
-            this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
-            this.bOK.Click += new System.EventHandler(this.bOK_Click);
+            bCancel.Click += new EventHandler(bCancel_Click);
+            bOK.Click += new EventHandler(bOK_Click);
+            FormClosing += new FormClosingEventHandler(TSH_Closing);
 
             this.TSS = TSS;
 
-            textboxNames = new String[] { "tNext1", "tNext2", "tPrev1", "tPrev2", "tFirst1", "tFirst2", "tLast1", "tLast2" };
+            textboxNames = new string[] { "tNext1", "tNext2", "tPrev1", "tPrev2", "tFirst1", "tFirst2", "tLast1", "tLast2" };
             newHotkeys = new Keys[8];
             for (int i = 0; i < newHotkeys.Length; i++) {
                 newHotkeys[i] = TSS.TST.Hotkeys[i];
             }
 
-            foreach (var c in this.Controls) {
-                if (c is System.Windows.Forms.TextBox) {
+            foreach (var c in Controls) {
+                if (c is TextBox) {
                     for (int i = 0; i < textboxNames.Length; i++) {
                         if (((TextBox)c).Name == textboxNames[i]) {
                             ((TextBox)c).Text = newHotkeys[i].ToString();
                         }
                     }
-                    ((TextBox)c).GotFocus += new EventHandler(this.tKeyPrompt_Focus);
-                    ((TextBox)c).LostFocus += new EventHandler(this.tKeyPrompt_LostFocus);
-                    ((TextBox)c).KeyDown += new KeyEventHandler(this.tKeyPrompt_Key);
+                    ((TextBox)c).GotFocus += new EventHandler(tKeyPrompt_Focus);
+                    ((TextBox)c).LostFocus += new EventHandler(tKeyPrompt_LostFocus);
+                    ((TextBox)c).KeyDown += new KeyEventHandler(tKeyPrompt_Key);
                 }
             }
         }
@@ -45,11 +46,14 @@ namespace TextSplit
         private void bOK_Click(object sender, EventArgs e) {
             TSS.TST.Hotkeys = newHotkeys;
             TSS.ChangeFilenameUnsaved();
-            this.Close();
+            Close();
         }
 
         private void bCancel_Click(object sender, EventArgs e) {
-            this.Close();
+        }
+
+        private void TSH_Closing(object sender, EventArgs e) {
+            bCancel.PerformClick();
         }
 
         private void tKeyPrompt_Focus(object sender, EventArgs e) {

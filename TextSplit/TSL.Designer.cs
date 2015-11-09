@@ -47,14 +47,14 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.tRight = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tLeft = new System.Windows.Forms.TextBox();
             this.tBottom = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tTop = new System.Windows.Forms.TextBox();
+            this.tRight = new System.Windows.Forms.TextBox();
+            this.tLeft = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -220,38 +220,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Margins (pixels)";
             // 
-            // tRight
-            // 
-            this.tRight.Location = new System.Drawing.Point(98, 45);
-            this.tRight.Name = "tRight";
-            this.tRight.Size = new System.Drawing.Size(61, 20);
-            this.tRight.TabIndex = 13;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 22);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(25, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Left";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 48);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(32, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Right";
-            // 
-            // tLeft
-            // 
-            this.tLeft.Location = new System.Drawing.Point(98, 19);
-            this.tLeft.Name = "tLeft";
-            this.tLeft.Size = new System.Drawing.Size(61, 20);
-            this.tLeft.TabIndex = 12;
-            // 
             // tBottom
             // 
             this.tBottom.Location = new System.Drawing.Point(98, 97);
@@ -284,13 +252,45 @@
             this.tTop.Size = new System.Drawing.Size(61, 20);
             this.tTop.TabIndex = 16;
             // 
+            // tRight
+            // 
+            this.tRight.Location = new System.Drawing.Point(98, 45);
+            this.tRight.Name = "tRight";
+            this.tRight.Size = new System.Drawing.Size(61, 20);
+            this.tRight.TabIndex = 13;
+            // 
+            // tLeft
+            // 
+            this.tLeft.Location = new System.Drawing.Point(98, 19);
+            this.tLeft.Name = "tLeft";
+            this.tLeft.Size = new System.Drawing.Size(61, 20);
+            this.tLeft.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(25, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Left";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Right";
+            // 
             // TextSplitLayout
             // 
+            this.AcceptButton = this.bOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bCancel;
-            this.ClientSize = new System.Drawing.Size(192, 412);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(192, 411);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -305,7 +305,6 @@
             this.MinimizeBox = false;
             this.Name = "TextSplitLayout";
             this.Text = "Edit Layout";
-            this.TopMost = true;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -345,6 +344,5 @@
         private System.Windows.Forms.TextBox tLeft;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-
     }
 }

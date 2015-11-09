@@ -19,27 +19,27 @@ namespace TextSplit
 
         // Opens a new window and loads the .tst file with the given fileName
         // If the file doesn't exist (e.g. fileName = ""), then it will open the example file
-        public TextSplitShow(string fileName) {
+        public TextSplitShow(string fileName, bool addToFileNames) {
             InitializeComponent();
 
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TSS_Closing);
-            this.tTextBox.GotFocus += new System.EventHandler(this.tTextBox_GotFocus);
-            this.tTextBox.LostFocus += new System.EventHandler(this.tTextBox_Unfocus);
-            this.tTextBox.MouseEnter += new System.EventHandler(this.tTextBox_MouseEnter);
-            this.SizeChanged += new System.EventHandler(this.TSS_SizeChanged);
-            this.Resize += new System.EventHandler(this.TSS_Resize);
+            FormClosing += new FormClosingEventHandler(TSS_Closing);
+            tTextBox.GotFocus += new EventHandler(tTextBox_GotFocus);
+            tTextBox.LostFocus += new EventHandler(tTextBox_Unfocus);
+            tTextBox.MouseEnter += new EventHandler(tTextBox_MouseEnter);
+            SizeChanged += new EventHandler(TSS_SizeChanged);
+            Resize += new EventHandler(TSS_Resize);
+            saveToolStripMenuItem.Click += new EventHandler(Globals.TSM.saveToolStripMenuItem_Click);
+            saveAsToolStripMenuItem.Click += new EventHandler(Globals.TSM.saveAsToolStripMenuItem_Click);
 
             currentSlide = 0;
             fileLoaded = false;
             saveChanged = false;
             this.fileName = fileName;
             TST = new TextSplitText();
-            Globals.currentWindow = this;
-            Globals.windowList.Add(this);
-
-            if (Properties.Settings.Default.FileName.Count < Globals.windowList.Count) {
-                Properties.Settings.Default.FileName.Add(fileName);
-            }
+            Globals.CurrentWindow = this;
+            Globals.WindowList.Add(this);
+            if (addToFileNames)
+                Properties.Settings.Default.FileNames.Add(fileName);
 
             serializer = new Serializer();
             try {
@@ -47,10 +47,9 @@ namespace TextSplit
                 FileChangeActions();
             } catch (Exception) {
                 this.fileName = "Example";
-                TST.Empty("Hello World!");
+                TST.Empty();
 
                 ChangeFilenameSaved();
-                DisplaySlide();
                 Globals.UpdateSlideInfo();
                 Globals.ChangeDisableHK();
                 Globals.ChangeReadOnly();
@@ -69,14 +68,14 @@ namespace TextSplit
             if (tTextBox.BackColor != bgColor) {
                 tTextBox.BackColor = bgColor;
             }
-            if (this.BackColor != bgColor) {
-                this.BackColor = bgColor;
+            if (BackColor != bgColor) {
+                BackColor = bgColor;
             }
             if (tTextBox.ForeColor != textColor) {
                 tTextBox.ForeColor = textColor;
             }
-            if (this.Size != new Size(size[0] + 16, size[1] + 38)) {
-                this.Size = new Size(size[0] + 16, size[1] + 38);
+            if (Size != new Size(size[0] + 16, size[1] + 38)) {
+                Size = new Size(size[0] + 16, size[1] + 38);
             }
             if (tTextBox.Size != new Size(size[0] - (margins[0] + margins[1]), size[1] - (margins[2] + margins[3]))) {
                 tTextBox.Size = new Size(size[0] - (margins[0] + margins[1]), size[1] - (margins[2] + margins[3]));
@@ -88,25 +87,25 @@ namespace TextSplit
         }
 
         public void DetectTextChange() {
-            if ((string)TST.TextList[currentSlide] != this.tTextBox.Text) {
-                TST.TextList[currentSlide] = this.tTextBox.Text;
+            if ((string)TST.TextList[currentSlide] != tTextBox.Text) {
+                TST.TextList[currentSlide] = tTextBox.Text;
                 ChangeFilenameUnsaved();
             }
         }
 
         public void ChangeFilenameSaved() {
-            this.Text = Path.GetFileNameWithoutExtension(fileName) + " - TextSplit";
+            Text = Path.GetFileNameWithoutExtension(fileName) + " - TextSplit";
             saveChanged = false;
         }
 
         public void ChangeFilenameUnsaved() {
-            this.Text = Path.GetFileNameWithoutExtension(fileName) + "* - TextSplit";
+            Text = Path.GetFileNameWithoutExtension(fileName) + "* - TextSplit";
             saveChanged = true;
         }
 
         public void CheckSaveChange() {
             if (fileLoaded && saveChanged) {
-                if (MessageBox.Show("Save changes to " + Path.GetFileNameWithoutExtension(fileName) + ".tst first?", "Save changes?", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+                if (MessageBox.Show("Save changes to " + Path.GetFileNameWithoutExtension(fileName) + ".tst first?", "Save changes?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                     SaveFile();
                 }
             }
@@ -120,13 +119,13 @@ namespace TextSplit
             CheckSaveChange(); // Saves the old file if it has any changes
 
             TextSplitText TST_temp = new TextSplitText(TST);
-            TST.Empty("Hello World!");
+            TST.Empty();
             SaveAsFile("New File");
             if (saveCancel) {
                 TST = TST_temp;
             } else {
-                this.Width = 300;
-                this.Height = 300;
+                Width = 300;
+                Height = 300;
             }
         }
 
@@ -142,8 +141,7 @@ namespace TextSplit
         public void SaveAsFile(string title) {
             saveFileDialog.Filter = "TextSplit Text File|*.tst";
             saveFileDialog.Title = title;
-            saveFileDialog.ShowDialog();
-            if (saveFileDialog.FileName != "") {
+            if (saveFileDialog.ShowDialog() != DialogResult.Cancel && saveFileDialog.FileName != "") {
                 fileName = saveFileDialog.FileName;
                 serializer.SerializeObject(fileName, TST);
                 FileChangeActions();
@@ -162,6 +160,7 @@ namespace TextSplit
                 fileName = openFileDialog.FileName;
                 TST = serializer.DeSerializeObject(fileName);
                 FileChangeActions();
+                Focus();
             }
         }
 
@@ -170,7 +169,7 @@ namespace TextSplit
             openFileDialog.Title = title;
             if (openFileDialog.ShowDialog() != DialogResult.Cancel && openFileDialog.FileName != "") {
                 string newFileName = openFileDialog.FileName;
-                TextSplitShow TSS = new TextSplitShow(newFileName);
+                TextSplitShow TSS = new TextSplitShow(newFileName, true);
                 TSS.TST = serializer.DeSerializeObject(newFileName);
                 Globals.OpenNewWindow(TSS);
             }
@@ -181,13 +180,11 @@ namespace TextSplit
             currentSlide = 0;
             DisplaySlide();
             Globals.UpdateSlideInfo();
-            Globals.ChangeReadOnly();
-            Globals.ChangeDisableHK();
             ChangeFilenameSaved();
             fileLoaded = true;
-            int index = Globals.windowList.IndexOf(this);
-            Properties.Settings.Default.FileName[index] = fileName;
-            Globals.ShowPropertiesFileName();
+            int index = Globals.WindowList.IndexOf(this);
+            Properties.Settings.Default.FileNames[index] = fileName;
+            Globals.ShowPropertiesFileNames();
         }
 
         public void GoToNext() {
@@ -200,7 +197,7 @@ namespace TextSplit
                 }
             }
             DisplaySlide();
-            if (this == Globals.currentWindow) {
+            if (this == Globals.CurrentWindow) {
                 Globals.UpdateSlideInfo();
             }
         }
@@ -215,7 +212,7 @@ namespace TextSplit
                 }
             }
             DisplaySlide();
-            if (this == Globals.currentWindow) {
+            if (this == Globals.CurrentWindow) {
                 Globals.UpdateSlideInfo();
             }
         }
@@ -224,7 +221,7 @@ namespace TextSplit
             DetectTextChange();
             currentSlide = 0;
             DisplaySlide();
-            if (this == Globals.currentWindow) {
+            if (this == Globals.CurrentWindow) {
                 Globals.UpdateSlideInfo();
             }
         }
@@ -233,7 +230,7 @@ namespace TextSplit
             DetectTextChange();
             currentSlide = TST.TextList.Count - 1;
             DisplaySlide();
-            if (this == Globals.currentWindow) {
+            if (this == Globals.CurrentWindow) {
                 Globals.UpdateSlideInfo();
             }
         }
@@ -243,8 +240,8 @@ namespace TextSplit
          */
 
         private void TSS_SizeChanged(object sender, EventArgs e) {
-            TST.Size[1] = this.Height - 38;
-            TST.Size[0] = this.Width - 16;
+            TST.Size[1] = Height - 38;
+            TST.Size[0] = Width - 16;
             tTextBox.Height = TST.Size[1] - (TST.Margins[2] + TST.Margins[3]);
             tTextBox.Width = TST.Size[0] - (TST.Margins[0] + TST.Margins[1]);
             tTextBox.Location = new Point(TST.Margins[0], TST.Margins[2]);
@@ -258,7 +255,7 @@ namespace TextSplit
         }
 
         private void tTextBox_GotFocus(object sender, EventArgs e) {
-            Globals.currentWindow = this;
+            Globals.CurrentWindow = this;
             Globals.UpdateSlideInfo();
             if (Properties.Settings.Default.ReadOnly) {
                 lFocusHandler.Focus();

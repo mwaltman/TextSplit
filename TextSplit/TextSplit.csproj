@@ -60,7 +60,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>TextSplit.Program</StartupObject>
@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KeyboardHook.cs" />
+    <Compile Include="Theme.cs" />
     <Compile Include="TSA.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -98,6 +98,7 @@
             // 
             // bOK
             // 
+            this.bOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bOK.Location = new System.Drawing.Point(139, 125);
             this.bOK.Name = "bOK";
             this.bOK.Size = new System.Drawing.Size(38, 23);
@@ -216,10 +217,11 @@
             // 
             // TextSplitHotkeys
             // 
+            this.AcceptButton = this.bOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.bCancel;
             this.ClientSize = new System.Drawing.Size(270, 160);
-            this.ControlBox = false;
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tLast2);
             this.Controls.Add(this.tLast1);

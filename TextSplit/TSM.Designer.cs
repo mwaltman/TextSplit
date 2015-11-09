@@ -43,11 +43,14 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editLayoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.themeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.editHotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.cReadOnly = new System.Windows.Forms.CheckBox();
             this.cDisableHK = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.bAddBegin = new System.Windows.Forms.Button();
             this.bAddAfter = new System.Windows.Forms.Button();
             this.bRemove = new System.Windows.Forms.Button();
             this.bAddBefore = new System.Windows.Forms.Button();
@@ -95,13 +98,13 @@
             // fileToolStripMenuItem1
             // 
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.fileToolStripMenuItem1.Text = "File...";
             // 
             // windowToolStripMenuItem
             // 
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
-            this.windowToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.windowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.windowToolStripMenuItem.Text = "Window";
             // 
             // toolStripSeparator2
@@ -157,6 +160,8 @@
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editLayoutToolStripMenuItem,
+            this.themeMenuItem,
+            this.toolStripSeparator3,
             this.editHotkeysToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
@@ -165,13 +170,24 @@
             // editLayoutToolStripMenuItem
             // 
             this.editLayoutToolStripMenuItem.Name = "editLayoutToolStripMenuItem";
-            this.editLayoutToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.editLayoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editLayoutToolStripMenuItem.Text = "Edit Layout...";
+            // 
+            // themeMenuItem
+            // 
+            this.themeMenuItem.Name = "themeMenuItem";
+            this.themeMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.themeMenuItem.Text = "Themes";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // editHotkeysToolStripMenuItem
             // 
             this.editHotkeysToolStripMenuItem.Name = "editHotkeysToolStripMenuItem";
-            this.editHotkeysToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.editHotkeysToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editHotkeysToolStripMenuItem.Text = "Edit Hotkeys...";
             // 
             // menuStrip
@@ -189,7 +205,7 @@
             // 
             this.cReadOnly.Appearance = System.Windows.Forms.Appearance.Button;
             this.cReadOnly.AutoSize = true;
-            this.cReadOnly.Location = new System.Drawing.Point(12, 197);
+            this.cReadOnly.Location = new System.Drawing.Point(12, 223);
             this.cReadOnly.Name = "cReadOnly";
             this.cReadOnly.Size = new System.Drawing.Size(97, 23);
             this.cReadOnly.TabIndex = 7;
@@ -200,7 +216,7 @@
             // 
             this.cDisableHK.Appearance = System.Windows.Forms.Appearance.Button;
             this.cDisableHK.AutoSize = true;
-            this.cDisableHK.Location = new System.Drawing.Point(118, 197);
+            this.cDisableHK.Location = new System.Drawing.Point(118, 223);
             this.cDisableHK.Name = "cDisableHK";
             this.cDisableHK.Size = new System.Drawing.Size(94, 23);
             this.cDisableHK.TabIndex = 8;
@@ -209,14 +225,24 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.bAddBegin);
             this.panel1.Controls.Add(this.bAddAfter);
             this.panel1.Controls.Add(this.bRemove);
             this.panel1.Controls.Add(this.bAddBefore);
             this.panel1.Controls.Add(this.bAddEnd);
             this.panel1.Location = new System.Drawing.Point(12, 72);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(114, 110);
+            this.panel1.Size = new System.Drawing.Size(114, 140);
             this.panel1.TabIndex = 4;
+            // 
+            // bAddBegin
+            // 
+            this.bAddBegin.Location = new System.Drawing.Point(0, 58);
+            this.bAddBegin.Name = "bAddBegin";
+            this.bAddBegin.Size = new System.Drawing.Size(108, 23);
+            this.bAddBegin.TabIndex = 4;
+            this.bAddBegin.Text = "Add Slide to Begin";
+            this.bAddBegin.UseVisualStyleBackColor = true;
             // 
             // bAddAfter
             // 
@@ -229,7 +255,7 @@
             // 
             // bRemove
             // 
-            this.bRemove.Location = new System.Drawing.Point(0, 87);
+            this.bRemove.Location = new System.Drawing.Point(0, 116);
             this.bRemove.Name = "bRemove";
             this.bRemove.Size = new System.Drawing.Size(108, 23);
             this.bRemove.TabIndex = 3;
@@ -247,7 +273,7 @@
             // 
             // bAddEnd
             // 
-            this.bAddEnd.Location = new System.Drawing.Point(0, 58);
+            this.bAddEnd.Location = new System.Drawing.Point(0, 87);
             this.bAddEnd.Name = "bAddEnd";
             this.bAddEnd.Size = new System.Drawing.Size(108, 23);
             this.bAddEnd.TabIndex = 2;
@@ -344,7 +370,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 232);
+            this.ClientSize = new System.Drawing.Size(224, 258);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.cDisableHK);
@@ -403,6 +429,9 @@
         private System.Windows.Forms.ToolStripMenuItem openInNewWindowToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.Label lCurrWindow;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.Button bAddBegin;
+        private System.Windows.Forms.ToolStripMenuItem themeMenuItem;
     }
 }
 

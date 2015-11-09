@@ -36,6 +36,7 @@
             // 
             // button1
             // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button1.Location = new System.Drawing.Point(137, 99);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(50, 23);
@@ -51,7 +52,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "TextSplit v1.6";
+            this.label1.Text = "TextSplit v1.7";
             // 
             // label2
             // 
@@ -66,6 +67,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button1;
             this.ClientSize = new System.Drawing.Size(199, 134);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

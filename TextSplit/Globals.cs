@@ -1,6 +1,8 @@
 ﻿using System.Windows.Forms;
 using System;
+using System.Drawing;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace TextSplit
@@ -10,7 +12,7 @@ namespace TextSplit
     {
         public static TextSplitMain TSM { get; set; }
         private static TextSplitShow _currentWindow;
-        public static TextSplitShow currentWindow { 
+        public static TextSplitShow CurrentWindow { 
             get {
                 return _currentWindow;
             }
@@ -21,53 +23,79 @@ namespace TextSplit
                 }
             } 
         }
-        public static ArrayList windowList { get; set; }
+        public static ArrayList WindowList { get; set; }
 
-        private static KeyboardHook hook;
+        public static Dictionary<string, Theme> Themes;
+
+        public static Dictionary<string, Theme> UserThemes;
+
+        private static KeyboardHook Hook;
 
         static Globals() {
             // Resets default settigns if in debug mode
             #if DEBUG
-                //Properties.Settings.Default.Reset();
+                Properties.Settings.Default.Reset();
             #endif
 
             TSM = null;
-            windowList = new ArrayList();
-            currentWindow = null;
+            WindowList = new ArrayList();
+            CurrentWindow = null;
 
-            if (Properties.Settings.Default.FileName == null) {
-                Properties.Settings.Default.FileName = new ArrayList();
+            if (Properties.Settings.Default.FileNames == null) {
+                Properties.Settings.Default.FileNames = new ArrayList();
             }
+            
+            // v1.7 Changes:
+            // - Numpad6 and Numpad4 are default for next and prev slide, respectively
+            // - Added 7 preset themes and users can save their layouts in custom themes
+            // - Ctrl+S and Ctrl+Shift+S to save progress now works from within text editors and not just from the main window
+            if (Properties.Settings.Default.UserThemes == null) {
+                Properties.Settings.Default.UserThemes = new ArrayList();
+            }
+
+            ShowPropertiesUserThemes();
 
             InitializeHotkeys();
         }
 
-        public static void ShowPropertiesFileName() {
-            //Console.Write("FILENAME: ");
-            //foreach (string str in Properties.Settings.Default.FileName) {
-            //    Console.Write("'" + str + "' ");
-            //}
-            //Console.WriteLine();
+        public static void ShowPropertiesFileNames() {
+            #if DEBUG
+                Console.Write("FILENAMES: ");
+                foreach (string str in Properties.Settings.Default.FileNames) {
+                    Console.Write("'" + str + "' ");
+                }
+                Console.WriteLine();
+            #endif
+        }
+
+        public static void ShowPropertiesUserThemes() {
+            #if DEBUG
+                Console.Write("USERTHEMES: ");
+                foreach (string str in Properties.Settings.Default.UserThemes) {
+                    Console.Write("'" + str + "' ");
+                }
+                Console.WriteLine();
+            #endif
         }
 
         public static void InitializeHotkeys() {
-            hook = new KeyboardHook();
-            hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
-            foreach (TextSplitShow TSS in windowList) {
+            Hook = new KeyboardHook();
+            Hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
+            foreach (TextSplitShow TSS in WindowList) {
                 for (int i = 0; i < TSS.TST.Hotkeys.Length; i++) {
                     if (TSS.TST.Hotkeys[i] != Keys.None) {
-                        hook.RegisterHotKey(TSS.TST.Hotkeys[i]);
+                        Hook.RegisterHotKey(TSS.TST.Hotkeys[i]);
                     }
                 }
             }
         }
 
         public static void ClearHotkeys() {
-            hook.Dispose();
+            Hook.Dispose();
         }
 
         public static void OpenNewWindow(TextSplitShow TSS) {
-            Globals.UpdateSlideInfo();
+            UpdateSlideInfo();
             TSS.Show();
             TSS.DisplaySlide();
             TSS.FileChangeActions();
@@ -75,14 +103,14 @@ namespace TextSplit
         }
 
         public static bool CloseWindow(TextSplitShow TSS, bool save) {
-            int index = Globals.windowList.IndexOf(TSS);
-            Globals.windowList.RemoveAt(index);
+            int index = WindowList.IndexOf(TSS);
+            WindowList.RemoveAt(index);
             if (!save) {
-                Properties.Settings.Default.FileName.RemoveAt(index);
+                Properties.Settings.Default.FileNames.RemoveAt(index);
             }
-            if (windowList.Count > 0) {
-                ((TextSplitShow)Globals.windowList[0]).Focus();
-                Globals.ShowPropertiesFileName();
+            if (WindowList.Count > 0) {
+                ((TextSplitShow)WindowList[0]).Focus();
+                ShowPropertiesFileNames();
                 return true;
             } else {
                 return false;
@@ -90,8 +118,8 @@ namespace TextSplit
         }
 
         public static void UpdateSlideInfo() {
-            TSM.lSlideCount.Text = "of " + currentWindow.TST.TextList.Count.ToString();
-            TSM.tGoToSlide.Text = (currentWindow.currentSlide + 1).ToString();
+            TSM.lSlideCount.Text = "of " + CurrentWindow.TST.TextList.Count.ToString();
+            TSM.tGoToSlide.Text = (CurrentWindow.currentSlide + 1).ToString();
         }
 
         public static void ChangeReadOnly() {
@@ -103,38 +131,93 @@ namespace TextSplit
         }
 
         public static void AddBefore() {
-            if (currentWindow.TST.TextList.Count <= 999) {
-                currentWindow.TST.TextList.Insert(currentWindow.currentSlide, "");
-                currentWindow.DisplaySlide();
-                currentWindow.ChangeFilenameUnsaved();
+            if (CurrentWindow.TST.TextList.Count <= 999) {
+                CurrentWindow.TST.TextList.Insert(CurrentWindow.currentSlide, "");
+                CurrentWindow.DisplaySlide();
+                CurrentWindow.ChangeFilenameUnsaved();
             }
         }
 
         public static void AddAfter() {
-            if (currentWindow.TST.TextList.Count <= 999) {
-                currentWindow.TST.TextList.Insert(currentWindow.currentSlide + 1, "");
-                currentWindow.currentSlide += 1;
-                currentWindow.DisplaySlide();
-                currentWindow.ChangeFilenameUnsaved();
+            if (CurrentWindow.TST.TextList.Count <= 999) {
+                CurrentWindow.TST.TextList.Insert(CurrentWindow.currentSlide + 1, "");
+                CurrentWindow.currentSlide += 1;
+                CurrentWindow.DisplaySlide();
+                CurrentWindow.ChangeFilenameUnsaved();
+            }
+        }
+
+        public static void AddBegin() {
+            if (CurrentWindow.TST.TextList.Count <= 999) {
+                CurrentWindow.TST.TextList.Insert(0, "");
+                CurrentWindow.currentSlide = 0;
+                CurrentWindow.DisplaySlide();
+                CurrentWindow.ChangeFilenameUnsaved();
             }
         }
 
         public static void AddEnd() {
-            if (currentWindow.TST.TextList.Count <= 999) {
-                currentWindow.TST.TextList.Add("");
-                currentWindow.currentSlide = currentWindow.TST.TextList.Count - 1;
-                currentWindow.DisplaySlide();
-                currentWindow.ChangeFilenameUnsaved();
+            if (CurrentWindow.TST.TextList.Count <= 999) {
+                CurrentWindow.TST.TextList.Add("");
+                CurrentWindow.currentSlide = CurrentWindow.TST.TextList.Count - 1;
+                CurrentWindow.DisplaySlide();
+                CurrentWindow.ChangeFilenameUnsaved();
             }
         }
 
         public static void Remove() {
-            if (currentWindow.TST.TextList.Count > 1) {
-                currentWindow.TST.TextList.RemoveAt(currentWindow.currentSlide);
-                currentWindow.currentSlide = currentWindow.TST.TextList.Count - 1;
-                currentWindow.DisplaySlide();
-                currentWindow.ChangeFilenameUnsaved();
+            if (CurrentWindow.TST.TextList.Count > 1) {
+                CurrentWindow.TST.TextList.RemoveAt(CurrentWindow.currentSlide);
+                CurrentWindow.currentSlide = CurrentWindow.TST.TextList.Count - 1;
+                CurrentWindow.DisplaySlide();
+                CurrentWindow.ChangeFilenameUnsaved();
             }
+        }
+
+        public static DialogResult ShowInputDialog(string title, ref string input) {
+            int pad = 12;
+            int minipad = 8;
+            int buttonHeight = 23;
+            Size size = new Size(220, 2*pad + minipad + 2* buttonHeight);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = FormBorderStyle.FixedSingle;
+            inputBox.ClientSize = size;
+            inputBox.MaximizeBox = false;
+            inputBox.MinimizeBox = false;
+            inputBox.ControlBox = true;
+            inputBox.Icon = TSM.Icon;
+            inputBox.StartPosition = FormStartPosition.CenterScreen;
+            inputBox.Text = title;
+
+            TextBox textBox = new TextBox();
+            textBox.Size = new Size(size.Width - 2*pad, buttonHeight);
+            textBox.Location = new Point(pad, pad);
+            textBox.Text = input;
+            inputBox.Controls.Add(textBox);
+
+            Button okButton = new Button();
+            okButton.DialogResult = DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new Size(75, buttonHeight);
+            okButton.Text = "OK";
+            okButton.Location = new Point(size.Width - 2*okButton.Size.Width - pad - minipad, size.Height - pad - buttonHeight);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(75, buttonHeight);
+            cancelButton.Text = "Cancel";
+            cancelButton.Location = new Point(size.Width - cancelButton.Size.Width - pad, size.Height - pad - buttonHeight);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            DialogResult result = inputBox.ShowDialog();
+            input = textBox.Text;
+            return result;
         }
 
         /*
@@ -142,7 +225,7 @@ namespace TextSplit
          */
 
         private static void hook_KeyPressed(object sender, KeyPressedEventArgs e) {
-            foreach (TextSplitShow TSS in Globals.windowList) {
+            foreach (TextSplitShow TSS in WindowList) {
                 if (e.Key == TSS.TST.Hotkeys[0] || e.Key == TSS.TST.Hotkeys[1]) {
                     TSS.GoToNext();
                 }

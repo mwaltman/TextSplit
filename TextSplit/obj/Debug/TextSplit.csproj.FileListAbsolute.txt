@@ -15,6 +15,20 @@ D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit
 D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.exe
 D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.pdb
 D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.csprojResolveAssemblyReference.cache
-D:\Documents\GitHub\TextSplit\TextSplit\bin\Debug\TextSplit.exe.config
-D:\Documents\GitHub\TextSplit\TextSplit\obj\Debug\TextSplit.exe
-D:\Documents\GitHub\TextSplit\TextSplit\obj\Debug\TextSplit.pdb
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.exe.config
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.exe
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.pdb
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.csprojResolveAssemblyReference.cache
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.TextSplitAbout.resources
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.TextSplitMain.resources
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.TextSplitShow.resources
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.TextSplitLayout.resources
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.TextSplitHotkeys.resources
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.Properties.Resources.resources
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.csproj.GenerateResource.Cache
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.exe.manifest
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.application
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.exe
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.pdb
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.exe.manifest
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.application

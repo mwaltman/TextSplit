@@ -21,13 +21,15 @@ namespace TextSplit
 
         public TextSplitLayout(TextSplitShow TSS) {
             InitializeComponent();
+            ShowIcon = true;
 
-            this.bTextColor.Click += new System.EventHandler(this.bTextColor_Click);
-            this.bBGColor.Click += new System.EventHandler(this.bBGColor_Click);
-            this.bOK.Click += new System.EventHandler(this.bOK_Click);
-            this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            this.bChooseFont.Click += new System.EventHandler(this.bChooseFont_Click);
+            bTextColor.Click += new EventHandler(bTextColor_Click);
+            bBGColor.Click += new EventHandler(bBGColor_Click);
+            bOK.Click += new EventHandler(bOK_Click);
+            bCancel.Click += new EventHandler(bCancel_Click);
+            checkBox1.CheckedChanged += new EventHandler(checkBox1_CheckedChanged);
+            bChooseFont.Click += new EventHandler(bChooseFont_Click);
+            FormClosing += new FormClosingEventHandler(TSL_Closing);
 
             this.TSS = TSS;
 
@@ -51,12 +53,12 @@ namespace TextSplit
             for (int i = 0; i < textboxList.Length; i++) {
                 if (i < 2) {
                     textboxList[i].Text = TSS.TST.Size[i].ToString();
-                    textboxList[i].LostFocus += new System.EventHandler(this.TextBoxWindow_Unfocus);
+                    textboxList[i].LostFocus += new EventHandler(TextBoxWindow_Unfocus);
                 } else {
                     textboxList[i].Text = TSS.TST.Margins[i - 2].ToString();
-                    textboxList[i].LostFocus += new System.EventHandler(this.TextBoxMargin_Unfocus);
+                    textboxList[i].LostFocus += new EventHandler(TextBoxMargin_Unfocus);
                 }
-                textboxList[i].KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_Enter);
+                textboxList[i].KeyDown += new KeyEventHandler(TextBox_Enter);
             }
 
             ToolTip toolTip = new ToolTip();
@@ -72,7 +74,10 @@ namespace TextSplit
             TSS.TST.Size = initialSize;
             TSS.TST.Margins = initialMargins;
             TSS.DisplaySlide();
-            this.Close();
+        }
+
+        private void TSL_Closing(object sender, EventArgs e) {
+            bCancel.PerformClick();
         }
 
         private void bOK_Click(object sender, EventArgs e) {
@@ -84,7 +89,7 @@ namespace TextSplit
             TSS.TST.Margins = newMargins;
             TSS.DisplaySlide();
             TSS.ChangeFilenameUnsaved();
-            this.Close();
+            Close();
         }
 
         private void bChooseFont_Click(object sender, EventArgs e) {
