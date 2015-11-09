@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MLC9gzgwOGVlsO8lHuX6kx9z1YdLPPmlqAjqv6j3M/0=</dsig:DigestValue>
+        <dsig:DigestValue>4nM6RKqzGtQrj4pd8i7PIfvFnQ5ci76qP5o3yDy3hwQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -69,7 +69,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>rtuxtyVd66Hii2d3t59C4WXEUwjoP4QUmfoMsWImvQo=</dsig:DigestValue>
+      <dsig:DigestValue>0HqwX3rAf887nZde6KJ/o7YiDvrNtgmvqaA00PX0Dd4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="TSIcon.ico" size="32038">
