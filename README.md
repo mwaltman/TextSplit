@@ -19,6 +19,6 @@ The latest version (v1.7) can be downloaded here:
 - v1.5: Added the ability to open multiple .tst files in seperate windows.
 - v1.6: Fixed issues and improved GUI regarding navigation between multiple .tst files.
 - v1.7: 
-  - Added several preset layout themes and users can create thei own themes.
+  - Added several preset layout themes and users can create their own themes.
   - Keyboard shortcuts now also work when the focus is on the text editor.
   - Numpad6 and Numpad4 are now the hotkeys for going to the next and previous slides by default.
