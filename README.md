@@ -4,8 +4,11 @@ TextSplit is a program that displays text slides and allows users to set global 
 # Features
 - Text font, text color, background color and margins are customizable in the layout.
 - Hotkeys for navigating to the next, previous, first and last slides can be customized. Hotkeys are global, meaning the program will respond even when TextSplit is not in focus.
-- Each slideshow, including its layout, is stored in a single .tst file. Multiple .tst files can be opened in seperate windows (as of v1.6).
+- Each slideshow, including its layout, is stored in a single .tst file. Multiple .tst files can be opened in separate windows.
 - Works great with video streaming software such as Open Broadcaster Software and can be used to write notes for presentations.
+
+# Wiki
+The documentation for this tool can be found in the [Wiki section](https://github.com/mwaltman/TextSplit/wiki) of this repository.
 
 # Download for Windows
 The latest version (v1.7) can be downloaded here:
@@ -20,5 +23,5 @@ The latest version (v1.7) can be downloaded here:
 - v1.6: Fixed issues and improved GUI regarding navigation between multiple .tst files.
 - v1.7: 
   - Added several preset layout themes and users can create their own themes.
-  - Keyboard shortcuts now also work when the focus is on the text editor.
+  - All keyboard shortcuts now also work when the focus is on the text editor.
   - Numpad6 and Numpad4 are now the hotkeys for going to the next and previous slides by default.
