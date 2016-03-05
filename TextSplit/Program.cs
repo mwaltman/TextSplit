@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TextSplit
@@ -16,7 +13,24 @@ namespace TextSplit
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TextSplitMain());
+
+            // Initiates Globals
+            Globals.StartGlobals();
+
+            // Cleans up after possible PerformUpdate call
+            Globals.AutoUpdater.DeletePreviousUpdateFiles();
+
+            // Checks for new updates
+            bool check = Globals.AutoUpdater.DoUpdateProcedure();
+
+            // If there are no new updates
+            if (!check) {
+                try {
+                    Application.Run(new TextSplitMain());
+                } catch (Exception e) {
+                    Globals.ShowErrorMessage("Failed to run application", e);
+                }
+            }
         }
     }
 }

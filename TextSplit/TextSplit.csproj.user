@@ -4,7 +4,7 @@
     <PublishUrlHistory>publish\|\publish\|D:\Documents\Visual Studio 2013\Projects\TextSplit\Publish\|\\localhost\Documents\Visual Studio 2013\Projects\TextSplit\Publish\</PublishUrlHistory>
     <InstallUrlHistory>http://localhost:8080/|\\localhost\Documents\Visual Studio 2013\Projects\TextSplit\Publish\</InstallUrlHistory>
     <SupportUrlHistory />
-    <UpdateUrlHistory />
+    <UpdateUrlHistory>https://raw.github.com/mwaltman/TextSplit/tree/master/TextSplit/publish/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>

@@ -19,10 +19,11 @@ namespace TextSplit
             ColorB = colorB;
         }
 
-        public void Apply() {
-            Globals.CurrentWindow.TST.TextFont = Font;
-            Globals.CurrentWindow.TST.Colors = new Color[] { ColorT, ColorB };
-            Globals.CurrentWindow.DisplaySlide();
+        public void Apply(TextSplitText tst, bool displaySlide) {
+            tst.TextFont = Font;
+            tst.Colors = new Color[] { ColorT, ColorB };
+            if (displaySlide)
+                Globals.CurrentWindow.DisplaySlide();
             Globals.CurrentWindow.ChangeFilenameUnsaved();
         }
 

@@ -16,17 +16,18 @@
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
+    <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>https://raw.github.com/mwaltman/TextSplit/tree/master/TextSplit/publish/</UpdateUrl>
     <TargetCulture>en-US</TargetCulture>
     <ProductName>TextSplit</ProductName>
     <PublisherName>Marijn Waltman</PublisherName>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -57,7 +58,7 @@
     <ManifestKeyFile>TextSplit_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -68,6 +69,12 @@
   <PropertyGroup />
   <PropertyGroup>
     <ApplicationIcon>TSIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -82,57 +89,92 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoUpdater.cs" />
     <Compile Include="KeyboardHook.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Theme.cs" />
-    <Compile Include="TSA.cs">
+    <Compile Include="TSAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TSA.Designer.cs">
-      <DependentUpon>TSA.cs</DependentUpon>
+    <Compile Include="TSAbout.Designer.cs">
+      <DependentUpon>TSAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="TSM.cs">
+    <Compile Include="TSMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TSM.Designer.cs">
-      <DependentUpon>TSM.cs</DependentUpon>
+    <Compile Include="TSMain.Designer.cs">
+      <DependentUpon>TSMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="TSS.cs">
+    <Compile Include="TSPreferences.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TSS.Designer.cs">
-      <DependentUpon>TSS.cs</DependentUpon>
+    <Compile Include="TSPreferences.Designer.cs">
+      <DependentUpon>TSPreferences.cs</DependentUpon>
     </Compile>
-    <Compile Include="TSL.cs">
+    <Compile Include="TSShow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TSL.Designer.cs">
-      <DependentUpon>TSL.cs</DependentUpon>
+    <Compile Include="TSShow.Designer.cs">
+      <DependentUpon>TSShow.cs</DependentUpon>
     </Compile>
-    <Compile Include="TSH.cs">
+    <Compile Include="TSLayout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TSH.Designer.cs">
-      <DependentUpon>TSH.cs</DependentUpon>
+    <Compile Include="TSLayout.Designer.cs">
+      <DependentUpon>TSLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSHotkeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSHotkeys.Designer.cs">
+      <DependentUpon>TSHotkeys.cs</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serializer.cs" />
+    <Compile Include="TSImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSImport.Designer.cs">
+      <DependentUpon>TSImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSExport.Designer.cs">
+      <DependentUpon>TSExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSSync.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSSync.Designer.cs">
+      <DependentUpon>TSSync.cs</DependentUpon>
+    </Compile>
     <Compile Include="TST.cs" />
-    <EmbeddedResource Include="TSA.resx">
-      <DependentUpon>TSA.cs</DependentUpon>
+    <Compile Include="TSUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSUpdate.Designer.cs">
+      <DependentUpon>TSUpdate.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="TSAbout.resx">
+      <DependentUpon>TSAbout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TSM.resx">
-      <DependentUpon>TSM.cs</DependentUpon>
+    <EmbeddedResource Include="TSMain.resx">
+      <DependentUpon>TSMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TSS.resx">
-      <DependentUpon>TSS.cs</DependentUpon>
+    <EmbeddedResource Include="TSPreferences.resx">
+      <DependentUpon>TSPreferences.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TSL.resx">
-      <DependentUpon>TSL.cs</DependentUpon>
+    <EmbeddedResource Include="TSShow.resx">
+      <DependentUpon>TSShow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TSH.resx">
-      <DependentUpon>TSH.cs</DependentUpon>
+    <EmbeddedResource Include="TSLayout.resx">
+      <DependentUpon>TSLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSHotkeys.resx">
+      <DependentUpon>TSHotkeys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -142,7 +184,21 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TSImport.resx">
+      <DependentUpon>TSImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSExport.resx">
+      <DependentUpon>TSExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSSync.resx">
+      <DependentUpon>TSSync.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSUpdate.resx">
+      <DependentUpon>TSUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -187,6 +243,14 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="EditIcon.png" />
+    <None Include="HotkeyIcon.png" />
+    <None Include="ContinuousIcon.png" />
+    <None Include="SyncIcon.png" />
+    <None Include="SyncTstIcon.png" />
+    <None Include="SyncTxtIcon.png" />
+    <None Include="CheckMarkIcon.png" />
+    <None Include="RedCrossIcon.png" />
     <Content Include="TSIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

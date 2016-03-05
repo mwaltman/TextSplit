@@ -14,5 +14,32 @@
     <Setting Name="UserThemes" Type="System.Collections.ArrayList" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="Continuous" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NavigateAll" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Hotkeys" Type="System.Collections.ArrayList" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultDelimiter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+----------
+</Value>
+    </Setting>
+    <Setting Name="DefaultInfoText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Slide $C$ / $T$
+</Value>
+    </Setting>
+    <Setting Name="NavigationWindowAlwaysOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DisplayVerticalScrollBars" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="TimeSinceLastCheck" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TextSplit.exe" size="250368">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TextSplit.exe" size="246784">
       <assemblyIdentity name="TextSplit" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>TnsRCF23mJ+aUHOYYtHMsOPAyvBSNvWv+WWdeSDJHc4=</dsig:DigestValue>
+        <dsig:DigestValue>4nM6RKqzGtQrj4pd8i7PIfvFnQ5ci76qP5o3yDy3hwQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -63,13 +63,13 @@
       <dsig:DigestValue>VpuKi6FWe7Ty6FJXnYXJJ41dBNDmq/znWEB7L3KAswc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="TextSplit.pdb" size="108032">
+  <file name="TextSplit.pdb" size="97792">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>IDP5UQ+3KXDtcs8sTKLn+1cnuu3nHy8ZR42cHMxr55E=</dsig:DigestValue>
+      <dsig:DigestValue>0HqwX3rAf887nZde6KJ/o7YiDvrNtgmvqaA00PX0Dd4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="TSIcon.ico" size="32038">

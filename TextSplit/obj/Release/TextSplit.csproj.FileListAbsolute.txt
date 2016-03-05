@@ -26,9 +26,10 @@ D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSpl
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSplit.TextSplitHotkeys.resources
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSplit.Properties.Resources.resources
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSplit.csproj.GenerateResource.Cache
-D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Release\TextSplit.exe.manifest
-D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Release\TextSplit.application
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Release\TextSplit.exe
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Release\TextSplit.pdb
-D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSplit.exe.manifest
-D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSplit.application
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSplit.TextSplitImport.resources
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSplit.TextSplitExport.resources
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSplit.TextSplitSync.resources
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSplit.TextSplitPreferences.resources
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Release\TextSplit.TextSplitUpdate.resources
