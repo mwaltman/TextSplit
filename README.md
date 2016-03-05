@@ -8,7 +8,7 @@ TextSplit is a program that displays text slides and allows users to set global 
 - Supports importing from txt files, where a delimiter string is used to divide the txt file into separate slides. Also supports saving to txt files. Automated importing and exporting is possible with the sync functionality.
 
 # Wiki
-The documentation for this tool can be found in the [Wiki section](https://github.com/mwaltman/TextSplit/wiki) of this repository.
+The documentation for TextSplit can be found in the [Wiki section](https://github.com/mwaltman/TextSplit/wiki) of this repository.
 
 # Download for Windows
 The latest version (v2.0) can be downloaded here:
