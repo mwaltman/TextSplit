@@ -14,13 +14,3 @@ The documentation for this tool can be found in the [Wiki section](https://githu
 The latest version (v2.0) can be downloaded here:
 
 [Download TextSplit v2.0](https://raw.github.com/mwaltman/TextSplit/master/TextSplit Latest Version.zip)
-
-# Changelog
-- v1.2: Fixed hotkey bugs.
-- v1.3: Added the ability to temporarily disable the global hotkeys.
-- v1.4: Margins between the text box and the sides of the window can be changed.
-- v1.5: Added the ability to open multiple .tst files in seperate windows.
-- v1.6: Fixed issues and improved GUI regarding navigation between multiple .tst files.
-- v1.7: 
-  - Added several preset layout themes and users can create their own themes.
-  - All keyboard shortcuts now also work when the focus is on the text editor.
