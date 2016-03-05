@@ -13,7 +13,7 @@ The documentation for this tool can be found in the [Wiki section](https://githu
 # Download for Windows
 The latest version (v2.0) can be downloaded here:
 
-[Download TextSplit v2.0](https://raw.github.com/mwaltman/TextSplit/master/TextSplit Latest Release.zip)
+[Download TextSplit v2.0](https://raw.github.com/mwaltman/TextSplit/master/TextSplit Latest Version.zip)
 
 # Changelog
 - v1.2: Fixed hotkey bugs.
