@@ -29,16 +29,15 @@ namespace TextSplit
             #endif
 
             // Manually set this for each new version that comes out
-            VersionNumber = "2.0.TEST";
+            VersionNumber = "2.0";
 
             TSM = null;
             WindowList = new ArrayList();
             CurrentWindow = null;
             Serializer = new Serializer();
-            //"https://raw.github.com/mwaltman/TextSplit/master/TextSplit/bin/Release/"
             string versionNumberFileURL = "https://raw.github.com/mwaltman/TextSplit/master/Misc/VersionNumber.txt";
-            string downloadBasePathURL = "https://raw.github.com/mwaltman/TextSplit/master/TEST/";
-            AutoUpdater = new AutoUpdater(VersionNumber, versionNumberFileURL, downloadBasePathURL, 1/24F);
+            string downloadBasePathURL = "https://raw.github.com/mwaltman/TextSplit/master/TextSplit/bin/Release/";
+            AutoUpdater = new AutoUpdater(VersionNumber, versionNumberFileURL, downloadBasePathURL, 5/(24F*60F));
             ToolTip = new ToolTip();
             ToolTip.ShowAlways = true;
             ToolTip.AutoPopDelay = 10000;

@@ -15,6 +15,9 @@ D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit
 D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.exe
 D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.pdb
 D:\Documents\Visual Studio 2013\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.csprojResolveAssemblyReference.cache
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.exe.config
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.exe
+D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.pdb
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.TextSplitAbout.resources
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.TextSplitMain.resources
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.TextSplitPreferences.resources
@@ -27,8 +30,5 @@ D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.TextSplitSync.resources
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.TextSplitUpdate.resources
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.csproj.GenerateResource.Cache
-D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.exe.config
-D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.exe
-D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\bin\Debug\TextSplit.pdb
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.exe
 D:\Documents\Visual Studio 2015\Projects\TextSplit\TextSplit\obj\Debug\TextSplit.pdb

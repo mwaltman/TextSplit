@@ -127,6 +127,29 @@ namespace TextSplit
                 Globals.OpenNewWindow(example);
                 example.fileLoaded = false;
             }
+
+#if DEBUG
+            editToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+            ToolStripMenuItem debugAutoUpdaterInfo = new ToolStripMenuItem("DEBUG AutoUpdater info");
+            editToolStripMenuItem.DropDownItems.Add(debugAutoUpdaterInfo);
+            debugAutoUpdaterInfo.Click += new EventHandler(debugAutoUpdaterInfo_Click);
+#endif
+        }
+
+        private void debugAutoUpdaterInfo_Click(object sender, EventArgs e) {
+            Globals.AutoUpdater.CheckForUpdate();
+            DialogResult result = MessageBox.Show(string.Format("Last update check:\t\t{0}\nDays since last check:\t{1}\nDays between checks:\t{2}\nVersion number file URL:\t{3}\nDownload path URL:\t{4}\nCurrent version:\t\t{5}\nLatest version:\t\t{6}\nCheckForUpdate:\t\t{7}\n\nPerform update?",
+                Properties.Settings.Default.TimeSinceLastCheck,
+                (DateTime.Now - Properties.Settings.Default.TimeSinceLastCheck).TotalDays,
+                Globals.AutoUpdater.DaysBetweenChecks,
+                Globals.AutoUpdater.VersionNumberFileURL,
+                Globals.AutoUpdater.DownloadBasePathURL,
+                Globals.AutoUpdater.VersionNumber,
+                Globals.AutoUpdater.LatestVersionNumber,
+                Globals.AutoUpdater.CheckForUpdate()), "AutoUpdater info:", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes) {
+                Globals.AutoUpdater.PerformUpdate();
+            }
         }
 
         private Theme UnpackThemeFromString(string s) {
