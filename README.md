@@ -1,6 +1,8 @@
 # TextSplit
 TextSplit is a program that displays text slides and allows users to set global hotkeys to navigate slides. 
 
+![TextSplit Preview](https://raw.github.com/mwaltman/TextSplit/master/Misc/Wiki/TextSplitPreview2.png)
+
 # Features
 - Text font, text color, background color and margins are customizable in the layout.
 - Hotkeys for navigating to the next, previous, first and last slides can be customized. Hotkeys are global, meaning the program will respond even when TextSplit is not in focus.
