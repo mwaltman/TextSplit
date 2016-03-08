@@ -15,4 +15,4 @@ The documentation for TextSplit can be found in the [Wiki section](https://githu
 # Download for Windows
 The latest version (v2.1) can be downloaded here:
 
-[Download TextSplit v2.1](https://raw.github.com/mwaltman/TextSplit/master/TextSplit Latest Version.zip)
+[Download TextSplit v2.1](https://raw.github.com/mwaltman/TextSplit/master/TextSplit.Latest.Version.zip)
