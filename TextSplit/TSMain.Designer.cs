@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextSplitMain));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,10 +75,13 @@
             this.bSyncTxt = new System.Windows.Forms.Button();
             this.cDisableHK = new System.Windows.Forms.CheckBox();
             this.cReadOnly = new System.Windows.Forms.CheckBox();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openTxtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -437,6 +441,7 @@
             // bSyncTxt
             // 
             this.bSyncTxt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bSyncTxt.ContextMenuStrip = this.contextMenuStrip;
             this.bSyncTxt.Enabled = false;
             this.bSyncTxt.Image = global::TextSplit.Properties.Resources.SyncTxtIcon;
             this.bSyncTxt.Location = new System.Drawing.Point(138, 224);
@@ -479,6 +484,19 @@
             this.cReadOnly.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cReadOnly.UseVisualStyleBackColor = false;
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openTxtFileToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(139, 26);
+            // 
+            // openTxtFileToolStripMenuItem
+            // 
+            this.openTxtFileToolStripMenuItem.Name = "openTxtFileToolStripMenuItem";
+            this.openTxtFileToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.openTxtFileToolStripMenuItem.Text = "Open txt file";
+            // 
             // TextSplitMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -506,6 +524,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -533,7 +552,6 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editLayoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editSyncSettingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem themesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openDocumentationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -557,6 +575,9 @@
         public System.Windows.Forms.Button bSyncTxt;
         public System.Windows.Forms.Button bSyncTst;
         public System.Windows.Forms.Button bUpdated;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem openTxtFileToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem themesToolStripMenuItem;
     }
 }
 

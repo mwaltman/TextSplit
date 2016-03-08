@@ -17,7 +17,7 @@ namespace TextSplit
         public float DaysBetweenChecks;
 
         private string UpgradeFolderName = @"\Upgrade";
-        private string[] DownloadFiles = new string[] { "TextSplit.application", "TextSplit.exe", "TextSplit.exe.manifest", "TextSplit.exe.config" };
+        private string[] DownloadFiles = new string[] { "TextSplit.exe", "TextSplit.exe.config" };
 
         public AutoUpdater(string versionNumber, string versionNumberFileURL, string downloadBasePathURL, float daysBetweenChecks) {
             VersionNumber = versionNumber;
@@ -48,12 +48,14 @@ namespace TextSplit
         }
 
         public bool CheckForUpdate() {
-            using (WebClient client = new WebClient()) {
-                string localFileCopy = Path.GetFileNameWithoutExtension(VersionNumberFileURL) + "Copy.txt";
-                client.DownloadFile(VersionNumberFileURL, localFileCopy);
-                LatestVersionNumber = File.ReadAllText(localFileCopy);
-                File.Delete(localFileCopy);
-                return !LatestVersionNumber.Equals(VersionNumber);
+            try {
+                using (WebClient client = new WebClient()) {
+                    LatestVersionNumber = client.DownloadString(VersionNumberFileURL);
+                    return !LatestVersionNumber.Equals(VersionNumber);
+                }
+            } catch (Exception) {
+                Globals.ShowErrorMessage("Failed to check for updates.");
+                return false;
             }
         }
 
@@ -79,7 +81,11 @@ namespace TextSplit
                 }
                 try {
                     Directory.Delete(currentProgramDirectory);
-                } catch (Exception) { }
+                } catch (Exception) {
+                    DirectoryInfo di = new DirectoryInfo(currentProgramDirectory);
+                    di.Attributes = di.Attributes & ~FileAttributes.Hidden;
+                    Globals.ShowErrorMessage("Failed to remove upgrade folder.");
+                }
                 ImportSettingsFromTxtFile("SettingsExport.txt");
                 return true;
             }
@@ -96,39 +102,44 @@ namespace TextSplit
                 while (retry) {
                     retry = false;
                     if (Directory.Exists(tempDirectory)) {
-                        DialogResult errorResult = MessageBox.Show("Error upgrading TextSplit. An upgrade folder (" + tempDirectory + ") already exists. Please remove the 'Upgrade' folder at the specified location and try again.", "Error", MessageBoxButtons.RetryCancel);
+                        DialogResult errorResult = MessageBox.Show("Failed to upgrade TextSplit. An upgrade folder (" + tempDirectory + ") already exists. Please remove the 'Upgrade' folder at the specified location and try again.", "Error", MessageBoxButtons.RetryCancel);
                         if (errorResult == DialogResult.Retry) {
                             retry = true;
                         } else {
                             Properties.Settings.Default.TimeSinceLastCheck = DateTime.MinValue;
                         }
                     } else {
-                        Directory.CreateDirectory(tempDirectory);
-
-                        // Downloads all the necessary files to the temp folder
-                        TextSplitUpdate updater = new TextSplitUpdate();
-                        updater.pProgressBar.Maximum = updater.pProgressBar.Step * (DownloadFiles.Length);
-                        updater.Show();
-                        using (WebClient client = new WebClient()) {
-                            for (int i = 0; i < DownloadFiles.Length; i++) {
-                                string downloadFullPath = DownloadBasePathURL + DownloadFiles[i];
-                                client.DownloadFile(downloadFullPath, tempDirectory + @"\" + DownloadFiles[i]);
-                                updater.pProgressBar.PerformStep();
-                                updater.Refresh();
+                        DirectoryInfo di = Directory.CreateDirectory(tempDirectory);
+                        di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+                        try {
+                            // Downloads all the necessary files to the temp folder
+                            TextSplitUpdate updater = new TextSplitUpdate();
+                            updater.pProgressBar.Maximum = updater.pProgressBar.Step * (DownloadFiles.Length);
+                            updater.Show();
+                            using (WebClient client = new WebClient()) {
+                                for (int i = 0; i < DownloadFiles.Length; i++) {
+                                    string downloadFullPath = DownloadBasePathURL + DownloadFiles[i];
+                                    client.DownloadFile(downloadFullPath, tempDirectory + @"\" + DownloadFiles[i]);
+                                    updater.pProgressBar.PerformStep();
+                                    updater.Refresh();
+                                }
                             }
+
+                            // Exports the settings to a text file in the main folder
+                            Properties.Settings.Default.Save();
+                            ExportSettingsToTxtFile(tempDirectory + @"\SettingsExport.txt");
+
+                            // Starts the newly downloaded version of TextSplit (asynchronously)
+                            Process.Start(tempDirectory + @"\TextSplit.exe");
+
+                            // Sets the setting IsJustUpdated to true and closes the application
+                            Globals.ClearHotkeys();
+                            Application.Exit();
+                            return true;
+                        } catch (Exception) {
+                            Globals.ShowErrorMessage("Failed to upgrade TextSplit. The files could not be downloaded.");
+                            Directory.Delete(tempDirectory);
                         }
-
-                        // Exports the settings to a text file in the main folder
-                        Properties.Settings.Default.Save();
-                        ExportSettingsToTxtFile("SettingsExport.txt");
-
-                        // Starts the newly downloaded version of TextSplit (asynchronously)
-                        Process.Start(tempDirectory + @"\TextSplit.exe");
-
-                        // Sets the setting IsJustUpdated to true and closes the application
-                        Globals.ClearHotkeys();
-                        Application.Exit();
-                        return true;
                     }
                 }
             }

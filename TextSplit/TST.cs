@@ -17,6 +17,7 @@ namespace TextSplit
         public string SyncTxtPath { get; set; } // The path to the synced txt file, otherwise it is null
         public string SyncDelimiterText { get; set; } // The delimiter text if syncing isenabled, otherwise it is null
         public bool SyncAutoSave { get; set; } // Whether auto save on sync is enabled
+        public bool SyncDisableTxtDialog { get; set; } // Whether the overwrite txt dialog will appear when syncing the txt file
 
         public TextSplitText() {
         }
@@ -30,6 +31,7 @@ namespace TextSplit
             SyncTxtPath = other.SyncTxtPath;
             SyncDelimiterText = other.SyncDelimiterText;
             SyncAutoSave = other.SyncAutoSave;
+            SyncDisableTxtDialog = other.SyncDisableTxtDialog;
         }
 
         public TextSplitText(SerializationInfo info, StreamingContext ctxt) {
@@ -54,17 +56,23 @@ namespace TextSplit
             try {
                 SyncAutoSave =      (bool)info.GetValue(        "SyncAutoSave",         typeof(bool));
             } catch (Exception) { SyncAutoSave = false; }
+
+            // v2.1 Attributes
+            try {
+                SyncDisableTxtDialog = (bool)info.GetValue(     "SyncDisableTxtDialog", typeof(bool));
+            } catch (Exception) { SyncDisableTxtDialog = false; }
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt) {
-            info.AddValue("List",               TextList);
-            info.AddValue("Font",               TextFont);
-            info.AddValue("Colors",             Colors);
-            info.AddValue("Size",               Size);
-            info.AddValue("Margins",            Margins);
-            info.AddValue("SyncTxtPath",        SyncTxtPath);
-            info.AddValue("SyncDelimiterText",  SyncDelimiterText);
-            info.AddValue("SyncAutoSave",       SyncAutoSave);
+            info.AddValue("List",                   TextList);
+            info.AddValue("Font",                   TextFont);
+            info.AddValue("Colors",                 Colors);
+            info.AddValue("Size",                   Size);
+            info.AddValue("Margins",                Margins);
+            info.AddValue("SyncTxtPath",            SyncTxtPath);
+            info.AddValue("SyncDelimiterText",      SyncDelimiterText);
+            info.AddValue("SyncAutoSave",           SyncAutoSave);
+            info.AddValue("SyncDisableTxtDialog",   SyncDisableTxtDialog);
         }
 
         public void SetEmpty() {
@@ -76,6 +84,7 @@ namespace TextSplit
             SyncTxtPath = null;
             SyncDelimiterText = "----------";
             SyncAutoSave = false;
+            SyncDisableTxtDialog = false;
         }
     }
 }

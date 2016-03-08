@@ -90,6 +90,13 @@ namespace TextSplit
             TSS.TST.Colors[1] = bBGColor.BackColor;
             TSS.TST.Size = new int[] { (int)tWidth.Value, (int)tHeight.Value };
             TSS.TST.Margins = new int[] { (int)tLeft.Value, (int)tRight.Value, (int)tTop.Value, (int)tBottom.Value };
+            if (Globals.TSM.lastAppliedThemeName != "") {
+                Theme lastAppliedTheme = Globals.Themes[Globals.TSM.lastAppliedThemeName];
+                if (!(TSS.TST.TextFont == lastAppliedTheme.Font && TSS.TST.Colors[0] == lastAppliedTheme.ColorT && TSS.TST.Colors[1] == lastAppliedTheme.ColorB)) {
+                    ((ToolStripMenuItem)Globals.TSM.themesToolStripMenuItem.DropDownItems.Find(Globals.TSM.lastAppliedThemeName, true)[0]).Checked = false;
+                    Globals.TSM.lastAppliedThemeName = "";
+                }
+            }
             TSS.DisplaySlide();
             TSS.ChangeFilenameUnsaved();
             Close();

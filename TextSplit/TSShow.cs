@@ -110,7 +110,7 @@ namespace TextSplit
 
         public void CheckSaveChange() {
             if (fileLoaded && saveChanged) {
-                DialogResult result = MessageBox.Show("Save changes to " + fileName + " first?", "Save changes?", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("Save changes to '" + fileName + "' first?", "Save changes?", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) {
                     SaveFile();
                 }
@@ -146,13 +146,6 @@ namespace TextSplit
             if (!saveCancel) {
                 if (TST.SyncAutoSave) {
                     Globals.SyncTxt();
-                } else {
-                    if (TST.SyncTxtPath != null) {
-                        DialogResult result = MessageBox.Show("Also sync " + TST.SyncTxtPath + "?", "Sync txt?", MessageBoxButtons.YesNo);
-                        if (result == DialogResult.Yes) {
-                            Globals.SyncTxt();
-                        }
-                    }
                 }
             }
         }

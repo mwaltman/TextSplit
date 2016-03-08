@@ -22,6 +22,7 @@ namespace TextSplit
             tBrowseSync.Text = Globals.CurrentWindow.TST.SyncTxtPath;
             tDelimiter.Text = Globals.CurrentWindow.TST.SyncDelimiterText;
             cAutoSync.Checked = Globals.CurrentWindow.TST.SyncAutoSave;
+            cDisableOverwriteDialog.Checked = Globals.CurrentWindow.TST.SyncDisableTxtDialog;
             bOK.Enabled = cSync.Checked;
 
             tempDelimiter = tDelimiter.Text;
@@ -79,6 +80,7 @@ namespace TextSplit
             }
             Globals.CurrentWindow.TST.SyncDelimiterText = tDelimiter.Text;
             Globals.CurrentWindow.TST.SyncAutoSave = cAutoSync.Checked;
+            Globals.CurrentWindow.TST.SyncDisableTxtDialog = cDisableOverwriteDialog.Checked;
             Globals.TSM.bSyncTst.Enabled = cSync.Checked;
             Globals.TSM.bSyncTxt.Enabled = cSync.Checked;
             Globals.UpdateUpdatedIcon();

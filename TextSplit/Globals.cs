@@ -29,7 +29,7 @@ namespace TextSplit
             #endif
 
             // Manually set this for each new version that comes out
-            VersionNumber = "2.0";
+            VersionNumber = "2.1";
 
             TSM = null;
             WindowList = new ArrayList();
@@ -102,17 +102,21 @@ namespace TextSplit
         }
 
         public static void OpenNewWindow(TextSplitShow TSS) {
-            UpdateSlideInfo();
-            if (Properties.Settings.Default.DisplayVerticalScrollBars == 0)
-                TSS.tTextBox.ScrollBars = RichTextBoxScrollBars.ForcedVertical;
-            if (Properties.Settings.Default.DisplayVerticalScrollBars == 1)
-                TSS.tTextBox.ScrollBars = RichTextBoxScrollBars.Vertical;
-            if (Properties.Settings.Default.DisplayVerticalScrollBars == 2)
-                TSS.tTextBox.ScrollBars = RichTextBoxScrollBars.ForcedVertical;
-            TSS.Show();
-            TSS.DisplaySlide();
-            TSS.FileChangeActions();
-            TSS.Focus();
+            if (WindowList.Count <= 1000) {
+                UpdateSlideInfo();
+                if (Properties.Settings.Default.DisplayVerticalScrollBars == 0)
+                    TSS.tTextBox.ScrollBars = RichTextBoxScrollBars.ForcedVertical;
+                if (Properties.Settings.Default.DisplayVerticalScrollBars == 1)
+                    TSS.tTextBox.ScrollBars = RichTextBoxScrollBars.Vertical;
+                if (Properties.Settings.Default.DisplayVerticalScrollBars == 2)
+                    TSS.tTextBox.ScrollBars = RichTextBoxScrollBars.ForcedVertical;
+                TSS.Show();
+                TSS.DisplaySlide();
+                TSS.FileChangeActions();
+                TSS.Focus();
+            } else {
+                ShowErrorMessage("Cannot open a new window. Maximum number of windows (1000) has been reached.");
+            }
         }
 
         public static bool CloseWindow(TextSplitShow TSS, bool save) {
@@ -276,7 +280,7 @@ namespace TextSplit
             tst.TextList.Clear();
             string slideText = File.ReadAllText(txtPath).Replace(Environment.NewLine, "\n");
             string currentSlideText;
-            delimiterText = '\n' + delimiterText + '\n';
+            delimiterText = "\n" + delimiterText.Replace(Environment.NewLine, "\n") + "\n";
             while (slideText.Contains(delimiterText)) {
                 currentSlideText = slideText.Remove(slideText.IndexOf(delimiterText));
                 slideText = slideText.Substring(slideText.IndexOf(delimiterText) + delimiterText.Length);
@@ -302,6 +306,7 @@ namespace TextSplit
                     result += delimiterText + Environment.NewLine; // Delimiter text
                 }
             }
+            result = result.Remove(result.LastIndexOf(Environment.NewLine)); // Removes the last Environment.NewLine, which is obsolete
             return result;
         }
 
@@ -315,11 +320,19 @@ namespace TextSplit
             // Syncing txt = clear txt file, then perform export to txt
             // If the file is already opened, then the changes will only take into effect after the txt file is restarted
             string syncText = GetExportText(CurrentWindow.TST.TextList, CurrentWindow.TST.SyncDelimiterText, null, false, true);
-            try {
-                File.WriteAllText(CurrentWindow.TST.SyncTxtPath, syncText);
-                UpdateUpdatedIcon(true);
-            } catch (Exception) {
-                ShowErrorMessage("Cannot sync txt file. An error has occurred.");
+            string txtText = File.ReadAllText(CurrentWindow.TST.SyncTxtPath);
+            if (!syncText.Equals(txtText)) {
+                DialogResult result = DialogResult.Yes;
+                if (!CurrentWindow.TST.SyncDisableTxtDialog)
+                    result = MessageBox.Show("The contents of the txt file '" + CurrentWindow.TST.SyncTxtPath + "' are different from the contents of the tst file. Do you want to overwrite the txt file?", "Overwrite txt file?", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes) {
+                    try {
+                        File.WriteAllText(CurrentWindow.TST.SyncTxtPath, syncText);
+                        UpdateUpdatedIcon(true);
+                    } catch (Exception) {
+                        ShowErrorMessage("Cannot sync txt file. An error has occurred.");
+                    }
+                }
             }
         }
 

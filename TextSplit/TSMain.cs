@@ -9,6 +9,7 @@ namespace TextSplit
     public partial class TextSplitMain : Form
     {
         public ToolStripMenuItem saveUserThemeItem;
+        public string lastAppliedThemeName = "";
 
         public TextSplitMain() {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace TextSplit
             bFirstSlide.Click += new EventHandler(bFirstSlide_Click);
             tGoToSlide.KeyDown += new KeyEventHandler(tGoToSlide_Enter);
             bNextSlide.Click += new EventHandler(bNextSlide_Click);
+            openTxtFileToolStripMenuItem.Click += new EventHandler(openTxtFileToolStripMenuItem_Click);
             FormClosing += new FormClosingEventHandler(TSM_Closing);
             Resize += new EventHandler(TSM_Resize);
 
@@ -129,6 +131,7 @@ namespace TextSplit
             }
 
 #if DEBUG
+            // Adds AutoUpdater info menu item when debugging
             editToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
             ToolStripMenuItem debugAutoUpdaterInfo = new ToolStripMenuItem("DEBUG AutoUpdater info");
             editToolStripMenuItem.DropDownItems.Add(debugAutoUpdaterInfo);
@@ -302,9 +305,11 @@ namespace TextSplit
             if (((ToolStripMenuItem)sender).Text == "Apply") {
                 Globals.Themes[((ToolStripMenuItem)sender).OwnerItem.Text].Apply(Globals.CurrentWindow.TST, true);
                 ((ToolStripMenuItem)((ToolStripMenuItem)sender).OwnerItem).Checked = true;
+                lastAppliedThemeName = ((ToolStripMenuItem)sender).OwnerItem.Text;
             } else {
                 Globals.Themes[((ToolStripMenuItem)sender).Text].Apply(Globals.CurrentWindow.TST, true);
                 ((ToolStripMenuItem)sender).Checked = true;
+                lastAppliedThemeName = ((ToolStripMenuItem)sender).Text;
             }
         }
 
@@ -431,6 +436,10 @@ namespace TextSplit
 
         private void bSyncTst_Click(object sender, EventArgs e) {
             Globals.SyncTst();
+        }
+
+        private void openTxtFileToolStripMenuItem_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start(Globals.CurrentWindow.TST.SyncTxtPath);
         }
 
         private void TSM_Resize(object sender, EventArgs e) {

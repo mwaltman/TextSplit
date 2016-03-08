@@ -31,6 +31,7 @@
             this.bOK = new System.Windows.Forms.Button();
             this.cSync = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cDisableOverwriteDialog = new System.Windows.Forms.CheckBox();
             this.tDelimiter = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.bBrowseSync = new System.Windows.Forms.Button();
@@ -43,7 +44,7 @@
             // bCancel
             // 
             this.bCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bCancel.Location = new System.Drawing.Point(273, 185);
+            this.bCancel.Location = new System.Drawing.Point(273, 208);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(75, 23);
             this.bCancel.TabIndex = 3;
@@ -52,7 +53,7 @@
             // 
             // bOK
             // 
-            this.bOK.Location = new System.Drawing.Point(229, 185);
+            this.bOK.Location = new System.Drawing.Point(229, 208);
             this.bOK.Name = "bOK";
             this.bOK.Size = new System.Drawing.Size(38, 23);
             this.bOK.TabIndex = 2;
@@ -71,6 +72,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cDisableOverwriteDialog);
             this.groupBox1.Controls.Add(this.tDelimiter);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.bBrowseSync);
@@ -79,9 +81,19 @@
             this.groupBox1.Controls.Add(this.cAutoSync);
             this.groupBox1.Location = new System.Drawing.Point(12, 35);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(336, 135);
+            this.groupBox1.Size = new System.Drawing.Size(336, 158);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // cDisableOverwriteDialog
+            // 
+            this.cDisableOverwriteDialog.AutoSize = true;
+            this.cDisableOverwriteDialog.Location = new System.Drawing.Point(9, 134);
+            this.cDisableOverwriteDialog.Name = "cDisableOverwriteDialog";
+            this.cDisableOverwriteDialog.Size = new System.Drawing.Size(236, 17);
+            this.cDisableOverwriteDialog.TabIndex = 6;
+            this.cDisableOverwriteDialog.Text = "Disable overwrite dialog when syncing txt file";
+            this.cDisableOverwriteDialog.UseVisualStyleBackColor = true;
             // 
             // tDelimiter
             // 
@@ -142,7 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(360, 220);
+            this.ClientSize = new System.Drawing.Size(360, 243);
             this.Controls.Add(this.cSync);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bCancel);
@@ -170,5 +182,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox cAutoSync;
         private System.Windows.Forms.TextBox tDelimiter;
+        private System.Windows.Forms.CheckBox cDisableOverwriteDialog;
     }
 }
