@@ -1,3 +1,269 @@
+<<<<<<< HEAD
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5E093E8E-1E33-4F61-A76A-0EF6E9BC58EF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TextSplit</RootNamespace>
+    <AssemblyName>TextSplit</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Background</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>https://raw.github.com/mwaltman/TextSplit/tree/master/TextSplit/publish/</UpdateUrl>
+    <TargetCulture>en-US</TargetCulture>
+    <ProductName>TextSplit</ProductName>
+    <PublisherName>Marijn Waltman</PublisherName>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>2.0.0.0</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>D9D765C6317EF708D1E207D244BD68BEDD508D21</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>TextSplit_1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TextSplit.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>TSIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoUpdater.cs" />
+    <Compile Include="KeyboardHook.cs" />
+    <Compile Include="LogFile.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Theme.cs" />
+    <Compile Include="TSAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSAbout.Designer.cs">
+      <DependentUpon>TSAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSMain.Designer.cs">
+      <DependentUpon>TSMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSPreferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSPreferences.Designer.cs">
+      <DependentUpon>TSPreferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSShow.Designer.cs">
+      <DependentUpon>TSShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSLayout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSLayout.Designer.cs">
+      <DependentUpon>TSLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSHotkeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSHotkeys.Designer.cs">
+      <DependentUpon>TSHotkeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globals.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serializer.cs" />
+    <Compile Include="TSImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSImport.Designer.cs">
+      <DependentUpon>TSImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSExport.Designer.cs">
+      <DependentUpon>TSExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSSync.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSSync.Designer.cs">
+      <DependentUpon>TSSync.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TST.cs" />
+    <Compile Include="TSUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TSUpdate.Designer.cs">
+      <DependentUpon>TSUpdate.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="TSAbout.resx">
+      <DependentUpon>TSAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSMain.resx">
+      <DependentUpon>TSMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSPreferences.resx">
+      <DependentUpon>TSPreferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSShow.resx">
+      <DependentUpon>TSShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSLayout.resx">
+      <DependentUpon>TSLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSHotkeys.resx">
+      <DependentUpon>TSHotkeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="TSImport.resx">
+      <DependentUpon>TSImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSExport.resx">
+      <DependentUpon>TSExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSSync.resx">
+      <DependentUpon>TSSync.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TSUpdate.resx">
+      <DependentUpon>TSUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="TextSplit_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="TextSplit.pdb">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EditIcon.png" />
+    <None Include="HotkeyIcon.png" />
+    <None Include="ContinuousIcon.png" />
+    <None Include="SyncIcon.png" />
+    <None Include="SyncTstIcon.png" />
+    <None Include="SyncTxtIcon.png" />
+    <None Include="CheckMarkIcon.png" />
+    <None Include="RedCrossIcon.png" />
+    <Content Include="TSIcon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+=======
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -261,4 +527,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+>>>>>>> origin/master
 </Project>
