@@ -13,6 +13,6 @@ TextSplit is a program that displays text slides and allows users to set global 
 The documentation for TextSplit can be found in the [Wiki section](https://github.com/mwaltman/TextSplit/wiki) of this repository.
 
 # Download for Windows
-The latest version (v2.1) can be downloaded here:
+The latest version (v2.2) can be downloaded here:
 
-[Download TextSplit v2.1](https://raw.github.com/mwaltman/TextSplit/master/TextSplit.Latest.Version.zip)
+[Download TextSplit v2.2](https://raw.github.com/mwaltman/TextSplit/master/TextSplit.Latest.Version.zip)
